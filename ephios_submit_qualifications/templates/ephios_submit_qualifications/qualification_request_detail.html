@@ -1,0 +1,13 @@
+{% extends "core/settings/settings_base.html" %}
+
+{% block settings_content %}
+    <h2>Details zur Qualifikationsanfrage</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-success" name="approve" value="1">Genehmigen</button>
+        <button class="btn btn-danger" name="deny" value="1">Ablehnen</button>
+    </form>
+
+    <a href="{% url 'ephios_submit_qualifications:qualification_requests' %}" class="btn btn-secondary">Zurück</a>
+{% endblock %}

@@ -1,0 +1,31 @@
+# ephios_submit_qualifications
+# Copyright (C) 2025 Ben Samuelson
+# This file is distributed under the same license as the ephios_submit_qualifications package.
+# Ben Samuelson <ben.samuelson@fiteka.de>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-07-20 17:08+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Ben Samuelson <ben.samuelson@fiteka.de>\n"
+"Language-Team: Ben Samuelson <ben.samuelson@fiteka.de>\n"
+"Language: German\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\ephios_submit_qualifications\apps.py:8
+msgid "Qualifications submiting"
+msgstr "Qualifikationen einreichen"
+
+#: .\ephios_submit_qualifications\apps.py:10
+msgid "Users can submit requests to gain qualifications"
+msgstr "Nutzer können Anfragen für Qualifikationen einreichen"
+
+#: .\ephios_submit_qualifications\signals.py:12
+msgid "Submit Qualifications"
+msgstr "Qualifikationen einreichen"

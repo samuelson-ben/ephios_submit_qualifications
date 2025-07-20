@@ -1,0 +1,11 @@
+{% extends "core/settings/settings_base.html" %}
+
+{% block settings_content %}
+  <h2>Qualifikation einreichen</h2>
+  <p>Hier kannst du eine Qualifikation einreichen.</p>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Speichern</button>
+  </form>
+{% endblock %}
