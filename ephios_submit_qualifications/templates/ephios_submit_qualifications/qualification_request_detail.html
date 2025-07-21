@@ -1,13 +1,84 @@
 {% extends "core/settings/settings_base.html" %}
 
-{% block settings_content %}
-    <h2>Details zur Qualifikationsanfrage</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button class="btn btn-success" name="approve" value="1">Genehmigen</button>
-        <button class="btn btn-danger" name="deny" value="1">Ablehnen</button>
-    </form>
+{% block css %}
+  <style type="text/x-scss">
+    .qualification-image {
+      max-width: 200px;
+      cursor: pointer;
+      width: 100%;
+    }
 
-    <a href="{% url 'ephios_submit_qualifications:qualification_requests' %}" class="btn btn-secondary">Zurück</a>
+    .modal-body {
+      text-align: center;
+    }
+
+    .modal-body img {
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
+{% endblock %}
+
+{% block settings_content %}
+<h2>Details zur Qualifikationsanfrage</h2>
+{% if qualification_request.image_data %}
+<p>Uploaded Image:</p>
+
+<img
+  id="qualificationImage"
+  src="{% url 'ephios_submit_qualifications:qualification_request_image' pk=qualification_request.pk %}"
+  alt="Qualification Image"
+  class="img-fluid qualification-image-preview"
+  data-bs-toggle="modal"
+  data-bs-target="#imageModal"
+/>
+
+<p>
+  <a
+    href="{% url 'ephios_submit_qualifications:qualification_request_image' pk=qualification_request.pk %}"
+    download="qualification_image_{{ qualification_request.pk }}"
+    class="btn btn-primary"
+  >
+    Bild herunterladen
+  </a>
+</p>
+
+<div
+  class="modal fade"
+  id="imageModal"
+  tabindex="-1"
+  aria-labelledby="imageModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-body p-0">
+        <img
+          src="{% url 'ephios_submit_qualifications:qualification_request_image' pk=qualification_request.pk %}"
+          alt="Qualification Image"
+        />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Schließen
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+{% else %}
+<p>No image uploaded.</p>
+{% endif %}
+
+<form method="post">
+  {% csrf_token %} {{ form.as_p }}
+  <button class="btn btn-success" name="approve" value="1">Genehmigen</button>
+  <button class="btn btn-danger" name="deny" value="1">Ablehnen</button>
+</form>
+
+<a
+  href="{% url 'ephios_submit_qualifications:qualification_requests' %}"
+  class="btn btn-secondary"
+  >Zurück</a
+>
 {% endblock %}

@@ -1,5 +1,6 @@
+from django.conf import settings
 from django.urls import path
-from .views import QualificationSubmitView, QualificationRequestsView, QualificationRequestDetailView
+from .views import QualificationSubmitView, QualificationRequestsView, QualificationRequestDetailView, qualification_request_image
 
 app_name = "ephios_submit_qualifications"
 
@@ -18,5 +19,10 @@ urlpatterns = [
         "settings/qualifications/requests/<int:pk>/",
         QualificationRequestDetailView.as_view(),
         name="qualification_request_detail",
+    ),
+    path(
+        "settings/qualifications/requests/<int:pk>/image/",
+        qualification_request_image,
+        name="qualification_request_image",
     ),
 ]
