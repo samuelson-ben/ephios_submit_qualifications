@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-21 17:08+0200\n"
+"POT-Creation-Date: 2025-07-21 17:28+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Ben Samuelson <ben.samuelson@fiteka.de>\n"
 "Language-Team: Ben Samuelson <ben.samuelson@fiteka.de>\n"
@@ -18,54 +18,121 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: apps.py:8
+#: .\apps.py:8
 msgid "Qualifications submiting"
 msgstr "Qualifikationen einreichen"
 
-#: apps.py:10
+#: .\apps.py:10
 msgid "Users can submit requests to gain qualifications."
 msgstr "Nutzer können Anfragen für Qualifikationen einreichen."
 
-#: forms.py:8
+#: .\forms.py:8
 msgid "Upload Image"
 msgstr "Bild hochladen"
 
-#: forms.py:16
+#: .\forms.py:16
 msgid "Select Qualification"
 msgstr "Qualifikation auswählen"
 
-#: forms.py:22
+#: .\forms.py:22
+#: .\templates\ephios_submit_qualifications\qualification_requests.html:11
 msgid "User"
 msgstr "Nutzer"
 
-#: forms.py:27
+#: .\forms.py:27
+#: .\templates\ephios_submit_qualifications\qualification_requests.html:12
 msgid "Qualification"
 msgstr "Qualifikationen"
 
-#: forms.py:33
+#: .\forms.py:33
 msgid "Requested At"
 msgstr "Angefragt am"
 
-#: forms.py:38
+#: .\forms.py:38
 msgid "Qualification Date"
 msgstr "Qualifikationsdatum"
 
-#: forms.py:43
+#: .\forms.py:43
 msgid "Expires At"
 msgstr "Läuft ab am"
 
-#: forms.py:48
+#: .\forms.py:48
 msgid "Reason for Action"
 msgstr "Grund für Aktion"
 
-#: forms.py:49
+#: .\forms.py:49
 msgid "Optional reason for action"
 msgstr "Optionaler Grund für Aktion"
 
-#: signals.py:16
+#: .\signals.py:16
 msgid "Submit Qualifications"
 msgstr "Qualifikationen einreichen"
 
 #: .\signals.py:26
 msgid "Manage Qualification Requests"
 msgstr "Qualifikationsanfragen verwalten"
+
+#: .\templates\ephios_submit_qualifications\qualification_request_detail.html:25
+msgid "Details for the Qualificationrequest"
+msgstr "Details der Qualifikationsanfrage"
+
+#: .\templates\ephios_submit_qualifications\qualification_request_detail.html:27
+#: .\templates\ephios_submit_qualifications\qualification_request_detail.html:32
+msgid "Uploaded Image"
+msgstr "Hochgeladenes Bild"
+
+#: .\templates\ephios_submit_qualifications\qualification_request_detail.html:44
+msgid "Download Image"
+msgstr "Bild herunterladen"
+
+#: .\templates\ephios_submit_qualifications\qualification_request_detail.html:60
+msgid "Qualification Image"
+msgstr "Qualifikationsbild"
+
+#: .\templates\ephios_submit_qualifications\qualification_request_detail.html:65
+msgid "Close"
+msgstr "Schließen"
+
+#: .\templates\ephios_submit_qualifications\qualification_request_detail.html:72
+msgid "No image uploaded."
+msgstr "Kein Bild hochgeladen."
+
+#: .\templates\ephios_submit_qualifications\qualification_request_detail.html:77
+msgid "Approve"
+msgstr "Bestätigen"
+
+#: .\templates\ephios_submit_qualifications\qualification_request_detail.html:78
+msgid "Deny"
+msgstr "Ablehnen"
+
+#: .\templates\ephios_submit_qualifications\qualification_request_detail.html:84
+msgid "Back"
+msgstr "Zurück"
+
+#: .\templates\ephios_submit_qualifications\qualification_requests.html:6
+msgid "Submitted Qualificationsrequests"
+msgstr "Eingereichte Qualifikationsanfragen"
+
+#: .\templates\ephios_submit_qualifications\qualification_requests.html:7
+msgid "Here you can manage all submitted qualificationsrequests."
+msgstr "Hier kannst du alle eingereichten Qualifikationsanfragen verwalten."
+
+#: .\templates\ephios_submit_qualifications\qualification_requests.html:13
+msgid "Action"
+msgstr "Aktion"
+
+#: .\templates\ephios_submit_qualifications\qualification_requests.html:27
+msgid "No qualificationsrequests found."
+msgstr "Keine Qualifikationsanfragen gefunden"
+
+#: .\templates\ephios_submit_qualifications\qualification_submit_form.html:6
+msgid "Submit Qualification"
+msgstr "Qualifikationen einreichen"
+
+#: .\templates\ephios_submit_qualifications\qualification_submit_form.html:7
+msgid "Here you can submit your qualifications."
+msgstr "Hier kannst du deine Qualifikationen einreichen."
+
+#: .\templates\ephios_submit_qualifications\qualification_submit_form.html:11
+msgid "Save"
+msgstr "Speichern"

@@ -1,14 +1,16 @@
 {% extends "core/settings/settings_base.html" %}
 
+{% load i18n %}
+
 {% block settings_content %}
-    <h2>Eingereichte Qualifikationsanfragen</h2>
-    <p>Hier kannst du deine eingereichten Qualifikationsanfragen verwalten.</p>
+    <h2>{% trans "Submitted Qualificationsrequests" %}</h2>
+    <p>{% trans "Here you can manage all submitted qualificationsrequests." %}</p>
     <table class="table">
         <thead>
             <tr>
-                <th>Nutzer</th>
-                <th>Qualifikation</th>
-                <th>Aktionen</th>
+                <th>{% trans "User" %}</th>
+                <th>{% trans "Qualification" %}</th>
+                <th>{% trans "Action" %}</th>
             </tr>
         </thead>
         <tbody>
@@ -17,12 +19,12 @@
                     <td>{{ request.user.get_full_name }}</td>
                     <td>{{ request.qualification }}</td>
                     <td>
-                        <a href="{% url 'ephios_submit_qualifications:qualification_request_detail' request.id %}" class="btn btn-info">Überprüfen</a>
+                        <a href="{% url 'ephios_submit_qualifications:qualification_request_detail' request.id %}" class="btn btn-info">Check</a>
                     </td>
                 </tr>
             {% empty %}
                 <tr>
-                    <td colspan="3">Keine Qualifikationsanfragen gefunden.</td>
+                    <td colspan="3">{% trans "No qualificationsrequests found." %}</td>
                 </tr>
             {% endfor %}
         </tbody>

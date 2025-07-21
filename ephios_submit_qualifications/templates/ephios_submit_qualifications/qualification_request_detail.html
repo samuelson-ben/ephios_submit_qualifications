@@ -1,5 +1,7 @@
 {% extends "core/settings/settings_base.html" %}
 
+{% load i18n %}
+
 {% block css %}
   <style type="text/x-scss">
     .qualification-image {
@@ -20,14 +22,14 @@
 {% endblock %}
 
 {% block settings_content %}
-<h2>Details zur Qualifikationsanfrage</h2>
+<h2>{% trans "Details for the Qualificationrequest" %}</h2>
 {% if qualification_request.image_data %}
-<p>Uploaded Image:</p>
+<p>{% trans "Uploaded Image" %}</p>
 
 <img
   id="qualificationImage"
   src="{% url 'ephios_submit_qualifications:qualification_request_image' pk=qualification_request.pk %}"
-  alt="Qualification Image"
+  alt="{% trans 'Uploaded Image' %}"
   class="img-fluid qualification-image-preview"
   data-bs-toggle="modal"
   data-bs-target="#imageModal"
@@ -39,7 +41,7 @@
     download="qualification_image_{{ qualification_request.pk }}"
     class="btn btn-primary"
   >
-    Bild herunterladen
+    {% trans "Download Image" %}
   </a>
 </p>
 
@@ -55,30 +57,30 @@
       <div class="modal-body p-0">
         <img
           src="{% url 'ephios_submit_qualifications:qualification_request_image' pk=qualification_request.pk %}"
-          alt="Qualification Image"
+          alt="{% trans 'Qualification Image' %}"
         />
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          Schließen
+          {% trans "Close" %}
         </button>
       </div>
     </div>
   </div>
 </div>
 {% else %}
-<p>No image uploaded.</p>
+<p>{% trans "No image uploaded." %}</p>
 {% endif %}
 
 <form method="post">
   {% csrf_token %} {{ form.as_p }}
-  <button class="btn btn-success" name="approve" value="1">Genehmigen</button>
-  <button class="btn btn-danger" name="deny" value="1">Ablehnen</button>
+  <button class="btn btn-success" name="approve" value="1">{% trans "Approve" %}</button>
+  <button class="btn btn-danger" name="deny" value="1">{% trans "Deny" %}</button>
 </form>
 
 <a
   href="{% url 'ephios_submit_qualifications:qualification_requests' %}"
   class="btn btn-secondary"
-  >Zurück</a
+  >{% trans "Back" %}</a
 >
 {% endblock %}

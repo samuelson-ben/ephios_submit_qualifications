@@ -1,11 +1,13 @@
 {% extends "core/settings/settings_base.html" %}
 
+{% load i18n %}
+
 {% block settings_content %}
-  <h2>Qualifikation einreichen</h2>
-  <p>Hier kannst du eine Qualifikation einreichen.</p>
+  <h2>{% trans "Submit Qualification" %}</h2>
+  <p>{% trans "Here you can submit your qualifications." %}</p>
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit" class="btn btn-primary">Speichern</button>
+    <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
   </form>
 {% endblock %}
