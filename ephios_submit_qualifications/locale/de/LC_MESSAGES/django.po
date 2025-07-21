@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-21 11:20+0200\n"
+"POT-Creation-Date: 2025-07-21 17:08+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Ben Samuelson <ben.samuelson@fiteka.de>\n"
 "Language-Team: Ben Samuelson <ben.samuelson@fiteka.de>\n"
@@ -18,65 +18,54 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\ephios_submit_qualifications\apps.py:8
+#: apps.py:8
 msgid "Qualifications submiting"
 msgstr "Qualifikationen einreichen"
 
-#: .\ephios_submit_qualifications\apps.py:10
-msgid "Users can submit requests to gain qualifications"
-msgstr "Nutzer können Anfragen für Qualifikationen einreichen"
+#: apps.py:10
+msgid "Users can submit requests to gain qualifications."
+msgstr "Nutzer können Anfragen für Qualifikationen einreichen."
 
-#: .\ephios_submit_qualifications\forms.py:8
+#: forms.py:8
 msgid "Upload Image"
 msgstr "Bild hochladen"
 
-#: .\ephios_submit_qualifications\forms.py:16
-#, fuzzy
-#| msgid "Submit Qualifications"
+#: forms.py:16
 msgid "Select Qualification"
-msgstr "Qualifikationen einreichen"
+msgstr "Qualifikation auswählen"
 
-#: .\ephios_submit_qualifications\forms.py:22
+#: forms.py:22
 msgid "User"
 msgstr "Nutzer"
 
-#: .\ephios_submit_qualifications\forms.py:27
-#, fuzzy
-#| msgid "Submit Qualifications"
+#: forms.py:27
 msgid "Qualification"
-msgstr "Qualifikationen einreichen"
+msgstr "Qualifikationen"
 
-#: .\ephios_submit_qualifications\forms.py:33
+#: forms.py:33
 msgid "Requested At"
 msgstr "Angefragt am"
 
-#: .\ephios_submit_qualifications\forms.py:38
-#, fuzzy
-#| msgid "Qualifications submiting"
+#: forms.py:38
 msgid "Qualification Date"
-msgstr "Qualifikationen einreichen"
+msgstr "Qualifikationsdatum"
 
-#: .\ephios_submit_qualifications\forms.py:43
+#: forms.py:43
 msgid "Expires At"
 msgstr "Läuft ab am"
 
-#: .\ephios_submit_qualifications\forms.py:48
+#: forms.py:48
 msgid "Reason for Action"
 msgstr "Grund für Aktion"
 
-#: .\ephios_submit_qualifications\forms.py:49
+#: forms.py:49
 msgid "Optional reason for action"
 msgstr "Optionaler Grund für Aktion"
 
-#: .\ephios_submit_qualifications\signals.py:16
+#: signals.py:16
 msgid "Submit Qualifications"
 msgstr "Qualifikationen einreichen"
 
-#: .\ephios_submit_qualifications\signals.py:26
-#, fuzzy
-#| msgid "Qualifications submiting"
+#: .\signals.py:26
 msgid "Manage Qualification Requests"
-msgstr "Qualifikationen einreichen"
-
-#~ msgid "Testing"
-#~ msgstr "Testen DE"
+msgstr "Qualifikationsanfragen verwalten"
