@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-22 10:44+0200\n"
+"POT-Creation-Date: 2025-07-22 21:14+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Ben Samuelson <ben.samuelson@fiteka.de>\n"
 "Language-Team: Ben Samuelson <ben.samuelson@fiteka.de>\n"
@@ -140,6 +140,10 @@ msgstr "Hier kannst du alle eingereichten Qualifikationsanfragen verwalten."
 #: .\templates\ephios_submit_qualifications\qualification_requests.html:13
 msgid "Action"
 msgstr "Aktion"
+
+#: .\templates\ephios_submit_qualifications\qualification_requests.html:22
+msgid "Check"
+msgstr "Überprüfen"
 
 #: .\templates\ephios_submit_qualifications\qualification_requests.html:27
 msgid "No qualificationsrequests found."

@@ -19,7 +19,7 @@
                     <td>{{ request.user.get_full_name }}</td>
                     <td>{{ request.qualification }}</td>
                     <td>
-                        <a href="{% url 'ephios_submit_qualifications:qualification_request_detail' request.id %}" class="btn btn-info">Check</a>
+                        <a href="{% url 'ephios_submit_qualifications:qualification_request_detail' request.id %}" class="btn btn-info">{% trans "Check" %}</a>
                     </td>
                 </tr>
             {% empty %}
