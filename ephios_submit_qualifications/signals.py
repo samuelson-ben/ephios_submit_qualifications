@@ -1,8 +1,9 @@
 from django.utils.translation import gettext_lazy as _
 from django.urls import reverse
 from django.dispatch import receiver
-from ephios.core.signals import settings_sections
+from ephios.core.signals import settings_sections, register_group_permission_fields
 from ephios.core.views.settings import SETTINGS_MANAGEMENT_SECTION_KEY, SETTINGS_PERSONAL_SECTION_KEY
+from ephios.extra.permissions import PermissionField
 
 @receiver(settings_sections)
 def add_navigation_item(sender, request, **kwargs):
@@ -10,7 +11,7 @@ def add_navigation_item(sender, request, **kwargs):
 
     sections = []
     
-    if user.is_authenticated:
+    if user.is_authenticated and user.has_perm('ephios_submit_qualifications.add_qualification_request'):
         sections.append(
             {
                 "label": _("Submit Qualifications"),
@@ -20,7 +21,7 @@ def add_navigation_item(sender, request, **kwargs):
             }
         )
     
-    if user.is_authenticated and (user.is_staff or user.has_perm('core.change_qualification')):
+    if user.is_authenticated and user.has_perm('ephios_submit_qualifications.view_qualification_requests'):
         sections.append(
             {
                 "label": _("Manage Qualification Requests"),
@@ -31,3 +32,41 @@ def add_navigation_item(sender, request, **kwargs):
         )
 
     return sections
+
+@receiver(register_group_permission_fields)
+def register_permission_fields(sender, **kwargs):
+    return [
+        (
+            "submit_qualification_requests",
+            PermissionField(
+                label=_("Submit Qualification Requests"),
+                help_text=_("Allows to submit qualification requests."),
+                permissions=[
+                    "ephios_submit_qualifications.add_qualification_request",
+                    "ephios_submit_qualifications.view_own_qualification_requests",
+                ],
+            ),
+        ),
+        (
+            "manage_qualification_requests",
+            PermissionField(
+                label=_("Manage Qualification Requests"),
+                help_text=_("Allows to manage qualification requests."),
+                permissions=[
+                    "ephios_submit_qualifications.view_qualification_requests",
+                    "ephios_submit_qualifications.view_qualification_request_details",
+                    "ephios_submit_qualifications.manage_qualification_requests",
+                ],
+            ),
+        ),
+        (
+            "manage_own_qualification_requests",
+            PermissionField(
+                label=_("Manage Own Qualification Requests"),
+                help_text=_("Allows to manage own qualification requests to."),
+                permissions=[
+                    "ephios_submit_qualifications.manage_own_qualification_requests",
+                ],
+            ),
+        ),
+    ]

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-21 17:28+0200\n"
+"POT-Creation-Date: 2025-07-22 10:44+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Ben Samuelson <ben.samuelson@fiteka.de>\n"
 "Language-Team: Ben Samuelson <ben.samuelson@fiteka.de>\n"
@@ -64,13 +64,33 @@ msgstr "Grund für Aktion"
 msgid "Optional reason for action"
 msgstr "Optionaler Grund für Aktion"
 
-#: .\signals.py:16
+#: .\signals.py:17
 msgid "Submit Qualifications"
 msgstr "Qualifikationen einreichen"
 
-#: .\signals.py:26
+#: .\signals.py:27 .\signals.py:53
 msgid "Manage Qualification Requests"
 msgstr "Qualifikationsanfragen verwalten"
+
+#: .\signals.py:42
+msgid "Submit Qualification Requests"
+msgstr "Qualifikationsanfragen einreichen"
+
+#: .\signals.py:43
+msgid "Allows to submit qualification requests."
+msgstr "Erlaubt es Qualifikationsanfragen einzureichen."
+
+#: .\signals.py:54
+msgid "Allows to manage qualification requests."
+msgstr "Erlaubt es Qualifikationsanfragen zu verwalten."
+
+#: .\signals.py:65
+msgid "Manage Own Qualification Requests"
+msgstr "Eigene Qualifikationsanfragen verwalten."
+
+#: .\signals.py:66
+msgid "Allows to manage own qualification requests to."
+msgstr "Erlaubt es auch eingene Qualifikationsanfragen zu verwalten."
 
 #: .\templates\ephios_submit_qualifications\qualification_request_detail.html:25
 msgid "Details for the Qualificationrequest"

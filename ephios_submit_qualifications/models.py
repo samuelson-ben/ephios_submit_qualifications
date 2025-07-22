@@ -23,6 +23,14 @@ class QualificationRequest(models.Model):
         verbose_name = "Qualification Request"
         verbose_name_plural = "Qualification Requests"
         ordering = ['-requested_at']
+        permissions = [
+            ("view_own_qualification_requests", "Can view own qualification requests"),
+            ("view_qualification_requests", "Can view all qualification requests"),
+            ("view_qualification_request_details", "Can view qualification request details"),
+            ("add_qualification_request", "Can add qualification requests"),
+            ("manage_qualification_requests", "Can manage qualification requests"),
+            ("manage_own_qualification_requests", "Can manage own qualification requests"),
+        ]
 
     def __str__(self):
         return f"{self.user} requested {self.qualification} on {self.requested_at}"

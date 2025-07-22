@@ -61,13 +61,14 @@ class QualificationRequestDetailView(LoginRequiredMixin, FormView):
     def dispatch(self, request, *args, **kwargs):
         self.qualification_request = get_object_or_404(QualificationRequest, pk=kwargs['pk'])
         user = request.user
+
         if not user.is_authenticated:
             raise PermissionDenied("You do not have permission to view this request.")
-        if not user.is_staff and user == self.qualification_request.user:
+        if user == self.qualification_request.user and not user.has_perm('ephios_submit_qualifications.view_own_qualification_requests'):
+            raise PermissionDenied("You do not have permission to view your own requests.")
+        if not user.has_perm('ephios_submit_qualifications.view_qualification_request_details'):
             raise PermissionDenied("You do not have permission to view this request.")
-        if user.is_staff or user.has_perm('core.change_qualification'):
-            return super().dispatch(request, *args, **kwargs)
-        raise PermissionDenied("An unexpected error occurred.")
+        return super().dispatch(request, *args, **kwargs)
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -86,6 +87,14 @@ class QualificationRequestDetailView(LoginRequiredMixin, FormView):
         }
     
     def form_valid(self, form):
+        user = self.request.user
+
+        if not user.is_authenticated:
+            raise PermissionDenied("You do not have permission to manage qualification requests.")
+        if not user.has_perm('ephios_submit_qualifications.manage_qualification_requests'):
+            raise PermissionDenied("You do not have permission to manage qualification requests.")
+        if user == self.qualification_request.user and not user.has_perm('ephios_submit_qualifications.view_own_qualification_requests'):
+            raise PermissionDenied("You do not have permission to manage your own requests.")
         if "approve" in self.request.POST:
             grant, created = QualificationGrant.objects.get_or_create(
                 user=self.qualification_request.user,
@@ -107,11 +116,10 @@ def qualification_request_image(request, pk):
     user = request.user
     if not user.is_authenticated:
         raise PermissionDenied("You do not have permission to view this image.")
-    if not user.is_staff and user == qr.user:
-        raise PermissionDenied("You do not have permission to view this image.")
-    
-    if not qr.image_data:
-        raise Http404("No image found for this qualification request.")
+    if user == qr.user and not user.has_perm('ephios_submit_qualifications.view_own_qualification_requests'):
+        raise PermissionDenied("You do not have permission to view your own request images.")
+    if not user.has_perm('ephios_submit_qualifications.view_qualification_request_details'):
+        raise PermissionDenied("You do not have permission to view this request image.")
     
     return HttpResponse(
         qr.image_data,
