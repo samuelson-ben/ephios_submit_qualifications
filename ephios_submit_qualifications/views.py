@@ -73,6 +73,8 @@ class QualificationRequestDetailView(LoginRequiredMixin, FormView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['qualification_request'] = self.qualification_request
+        context['is_own_request'] = self.request.user == self.qualification_request.user
+        context['can_manage_own_request'] = self.request.user.has_perm('ephios_submit_qualifications.manage_own_qualification_requests')
         return context
 
     def get_initial(self):

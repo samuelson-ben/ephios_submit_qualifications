@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-22 21:14+0200\n"
+"POT-Creation-Date: 2025-07-22 21:19+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Ben Samuelson <ben.samuelson@fiteka.de>\n"
 "Language-Team: Ben Samuelson <ben.samuelson@fiteka.de>\n"
@@ -117,15 +117,19 @@ msgstr "Schließen"
 msgid "No image uploaded."
 msgstr "Kein Bild hochgeladen."
 
-#: .\templates\ephios_submit_qualifications\qualification_request_detail.html:77
+#: .\templates\ephios_submit_qualifications\qualification_request_detail.html:78
+msgid "You aren't allowed to manage your own qualification request."
+msgstr "Du hast nicht die nötige Berechtigung, deine eigene Qualifikationanfrage zu verwalten."
+
+#: .\templates\ephios_submit_qualifications\qualification_request_detail.html:80
 msgid "Approve"
 msgstr "Bestätigen"
 
-#: .\templates\ephios_submit_qualifications\qualification_request_detail.html:78
+#: .\templates\ephios_submit_qualifications\qualification_request_detail.html:81
 msgid "Deny"
 msgstr "Ablehnen"
 
-#: .\templates\ephios_submit_qualifications\qualification_request_detail.html:84
+#: .\templates\ephios_submit_qualifications\qualification_request_detail.html:88
 msgid "Back"
 msgstr "Zurück"
 
