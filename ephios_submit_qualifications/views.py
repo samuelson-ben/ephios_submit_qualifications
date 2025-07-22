@@ -65,7 +65,7 @@ class QualificationRequestDetailView(LoginRequiredMixin, FormView):
         if not user.is_authenticated:
             raise PermissionDenied("You do not have permission to view this request.")
         if user == self.qualification_request.user and not user.has_perm('ephios_submit_qualifications.view_own_qualification_requests'):
-            raise PermissionDenied("You do not have permission to view your own requests.")
+            raise PermissionDenied("You do not have permission to view your own request images.")
         if not user.has_perm('ephios_submit_qualifications.view_qualification_request_details'):
             raise PermissionDenied("You do not have permission to view this request.")
         return super().dispatch(request, *args, **kwargs)
@@ -93,7 +93,7 @@ class QualificationRequestDetailView(LoginRequiredMixin, FormView):
             raise PermissionDenied("You do not have permission to manage qualification requests.")
         if not user.has_perm('ephios_submit_qualifications.manage_qualification_requests'):
             raise PermissionDenied("You do not have permission to manage qualification requests.")
-        if user == self.qualification_request.user and not user.has_perm('ephios_submit_qualifications.view_own_qualification_requests'):
+        if user == self.qualification_request.user and not user.has_perm('ephios_submit_qualifications.manage_own_qualification_requests'):
             raise PermissionDenied("You do not have permission to manage your own requests.")
         if "approve" in self.request.POST:
             grant, created = QualificationGrant.objects.get_or_create(
