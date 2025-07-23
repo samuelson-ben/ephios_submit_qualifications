@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-23 10:11+0200\n"
+"POT-Creation-Date: 2025-07-23 11:50+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Ben Samuelson <ben.samuelson@fiteka.de>\n"
 "Language-Team: Ben Samuelson <ben.samuelson@fiteka.de>\n"
@@ -71,6 +71,37 @@ msgstr "Grund für Aktion"
 #: .\forms.py:57
 msgid "Optional reason for action"
 msgstr "Optionaler Grund für Aktion"
+
+#: .\notifications.py:14 .\notifications.py:29
+msgid "Qualification Request Accepted"
+msgstr "Qualifikationsanfrage Akzeptiert"
+
+#: .\notifications.py:34
+#, python-brace-format
+msgid "Your qualification request for {qualification} has been accepted."
+msgstr "Deine Qualifikationsanfrage für {qualification} wurde akzeptiert."
+
+#: .\notifications.py:36 .\notifications.py:77
+msgid "Unknown Qualification"
+msgstr "Unbekannte Qualifikation"
+
+#: .\notifications.py:40 .\notifications.py:81
+#, python-brace-format
+msgid ""
+"\n"
+"Reason: {reason}"
+msgstr ""
+"\n"
+"Grund: {reason}"
+
+#: .\notifications.py:59 .\notifications.py:70
+msgid "Qualification Request Rejected"
+msgstr "Qualifikationsanfrage Abgelehnt"
+
+#: .\notifications.py:75
+#, python-brace-format
+msgid "Your qualification request for {qualification} has been rejected."
+msgstr "Deine Qualifikationsanfrage für {qualification} wurde abgelehnt."
 
 #: .\signals.py:17
 msgid "Submit Qualifications"

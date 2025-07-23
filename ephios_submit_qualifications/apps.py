@@ -11,3 +11,7 @@ class PluginApp(PluginConfig):
 
     def ready(self):
         from . import signals  # NOQA
+
+        from ephios.core.signals import register_notification_types
+        from .notifications import register_notifications
+        register_notification_types.connect(register_notifications, dispatch_uid="ephios_submit_qualifications.register_notifications")

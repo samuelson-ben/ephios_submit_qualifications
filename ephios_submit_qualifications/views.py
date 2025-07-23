@@ -1,3 +1,4 @@
+from datetime import datetime, time
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
@@ -5,13 +6,15 @@ from django.http import HttpResponse, Http404
 from django.utils.timezone import localtime
 from django.utils.decorators import method_decorator
 from django.shortcuts import get_object_or_404
-from django.views.generic import DetailView, FormView, TemplateView
+from django.views.generic import FormView, TemplateView
 from django.urls import reverse_lazy
 from ephios.core.models import QualificationGrant
 from .forms import QualificationSubmitForm, QualificationDetailForm
 from .models import QualificationRequest
-
-from logging import getLogger
+from .notifications import (
+    QualificationRequestAcceptedNotification,
+    QualificationRequestRejectedNotification,
+)
 
 class QualificationSubmitView(LoginRequiredMixin, FormView):
     template_name = "ephios_submit_qualifications/qualification_submit_form.html"
@@ -115,17 +118,24 @@ class QualificationRequestDetailView(LoginRequiredMixin, FormView):
             raise PermissionDenied("You do not have permission to manage qualification requests.")
         if user == self.qualification_request.user and not user.has_perm('ephios_submit_qualifications.manage_own_qualification_requests'):
             raise PermissionDenied("You do not have permission to manage your own requests.")
+        
+        reason = form.cleaned_data.get('reason', None)
         if "approve" in self.request.POST:
+            expires_at = form.cleaned_data.get('expires_at')
+            if expires_at:
+                expires_at = datetime.combine(expires_at, time(23, 59))
             grant, created = QualificationGrant.objects.get_or_create(
                 user=self.qualification_request.user,
                 qualification=self.qualification_request.qualification,
-                defaults={'expires': form.cleaned_data.get('expires_at')}
+                defaults={'expires': expires_at}
             )
             if not created:
                 grant.expires = form.cleaned_data.get('expires_at')
                 grant.save()
+            QualificationRequestAcceptedNotification.send(self, reason)
             self.qualification_request.delete()
         elif "deny" in self.request.POST:
+            QualificationRequestRejectedNotification.send(self, reason)
             self.qualification_request.delete()
         return super().form_valid(form)
 
