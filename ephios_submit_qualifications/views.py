@@ -18,6 +18,15 @@ class QualificationSubmitView(LoginRequiredMixin, FormView):
     form_class = QualificationSubmitForm
     success_url = reverse_lazy("core:settings_personal_data")
 
+    def dispatch(self, request, *args, **kwargs):
+        user = request.user
+
+        if not user.is_authenticated:
+            raise PermissionDenied("You do not have permission to submit qualifications.")
+        if not user.has_perm('ephios_submit_qualifications.add_qualification_request'):
+            raise PermissionDenied("You do not have permission to submit qualifications.")
+        return super().dispatch(request, *args, **kwargs)
+
     def get_initial(self):
         initial = super().get_initial()
         return initial
@@ -43,6 +52,15 @@ class QualificationSubmitView(LoginRequiredMixin, FormView):
 
 class QualificationRequestsView(LoginRequiredMixin, TemplateView):
     template_name = "ephios_submit_qualifications/qualification_requests.html"
+
+    def dispatch(self, request, *args, **kwargs):
+        user = request.user
+
+        if not user.is_authenticated:
+            raise PermissionDenied("You do not have permission to view qualification requests.")
+        if not user.has_perm('ephios_submit_qualifications.view_qualification_requests'):
+            raise PermissionDenied("You do not have permission to view qualification requests.")
+        return super().dispatch(request, *args, **kwargs)
 
     def get_initial(self):
         initial = super().get_initial()
