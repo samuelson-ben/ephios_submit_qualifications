@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-23 11:50+0200\n"
+"POT-Creation-Date: 2025-07-23 15:13+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Ben Samuelson <ben.samuelson@fiteka.de>\n"
 "Language-Team: Ben Samuelson <ben.samuelson@fiteka.de>\n"
@@ -48,6 +48,7 @@ msgid "User"
 msgstr "Nutzer"
 
 #: .\forms.py:35
+#: .\templates\ephios_submit_qualifications\own_qualification_requests.html:14
 #: .\templates\ephios_submit_qualifications\qualification_requests.html:12
 msgid "Qualification"
 msgstr "Qualifikationen"
@@ -72,20 +73,21 @@ msgstr "Grund für Aktion"
 msgid "Optional reason for action"
 msgstr "Optionaler Grund für Aktion"
 
-#: .\notifications.py:14 .\notifications.py:29
+#: .\notifications.py:14 .\notifications.py:30
 msgid "Qualification Request Accepted"
 msgstr "Qualifikationsanfrage Akzeptiert"
 
-#: .\notifications.py:34
+#: .\notifications.py:23 .\notifications.py:37 .\notifications.py:69
+#: .\notifications.py:83
+msgid "Unknown Qualification"
+msgstr "Unbekannte Qualifikation"
+
+#: .\notifications.py:35
 #, python-brace-format
 msgid "Your qualification request for {qualification} has been accepted."
 msgstr "Deine Qualifikationsanfrage für {qualification} wurde akzeptiert."
 
-#: .\notifications.py:36 .\notifications.py:77
-msgid "Unknown Qualification"
-msgstr "Unbekannte Qualifikation"
-
-#: .\notifications.py:40 .\notifications.py:81
+#: .\notifications.py:41 .\notifications.py:87
 #, python-brace-format
 msgid ""
 "\n"
@@ -94,18 +96,18 @@ msgstr ""
 "\n"
 "Grund: {reason}"
 
-#: .\notifications.py:59 .\notifications.py:70
+#: .\notifications.py:60 .\notifications.py:76
 msgid "Qualification Request Rejected"
 msgstr "Qualifikationsanfrage Abgelehnt"
 
-#: .\notifications.py:75
+#: .\notifications.py:81
 #, python-brace-format
 msgid "Your qualification request for {qualification} has been rejected."
 msgstr "Deine Qualifikationsanfrage für {qualification} wurde abgelehnt."
 
 #: .\signals.py:17
-msgid "Submit Qualifications"
-msgstr "Qualifikationen einreichen"
+msgid "Own Qualification Requests"
+msgstr "Eigene Qualifikationsanfragen"
 
 #: .\signals.py:27 .\signals.py:53
 msgid "Manage Qualification Requests"
@@ -130,6 +132,38 @@ msgstr "Eigene Qualifikationsanfragen verwalten."
 #: .\signals.py:66
 msgid "Allows to manage own qualification requests to."
 msgstr "Erlaubt es auch eingene Qualifikationsanfragen zu verwalten."
+
+#: .\templates\ephios_submit_qualifications\own_qualification_requests.html:6
+#: .\templates\ephios_submit_qualifications\qualification_requests.html:6
+msgid "Submitted Qualificationsrequests"
+msgstr "Eingereichte Qualifikationsanfragen"
+
+#: .\templates\ephios_submit_qualifications\own_qualification_requests.html:7
+msgid "Here you can manage your submitted qualificationsrequests."
+msgstr "Hier kannst du alle eingereichten Qualifikationsanfragen verwalten."
+
+#: .\templates\ephios_submit_qualifications\own_qualification_requests.html:9
+msgid "Submit Qualification Request"
+msgstr "Qualifikationsanfragen einreichen"
+
+#: .\templates\ephios_submit_qualifications\own_qualification_requests.html:15
+msgid "Requested at"
+msgstr "Angefragt am"
+
+#: .\templates\ephios_submit_qualifications\own_qualification_requests.html:16
+#: .\templates\ephios_submit_qualifications\qualification_requests.html:13
+msgid "Action"
+msgstr "Aktion"
+
+#: .\templates\ephios_submit_qualifications\own_qualification_requests.html:25
+#: .\templates\ephios_submit_qualifications\qualification_requests.html:22
+msgid "Check"
+msgstr "Überprüfen"
+
+#: .\templates\ephios_submit_qualifications\own_qualification_requests.html:30
+#: .\templates\ephios_submit_qualifications\qualification_requests.html:27
+msgid "No qualificationsrequests found."
+msgstr "Keine Qualifikationsanfragen gefunden"
 
 #: .\templates\ephios_submit_qualifications\qualification_request_detail.html:25
 msgid "Details for the Qualificationrequest"
@@ -170,29 +204,14 @@ msgstr "Bestätigen"
 msgid "Deny"
 msgstr "Ablehnen"
 
+#: .\templates\ephios_submit_qualifications\qualification_request_detail.html:86
 #: .\templates\ephios_submit_qualifications\qualification_request_detail.html:88
 msgid "Back"
 msgstr "Zurück"
 
-#: .\templates\ephios_submit_qualifications\qualification_requests.html:6
-msgid "Submitted Qualificationsrequests"
-msgstr "Eingereichte Qualifikationsanfragen"
-
 #: .\templates\ephios_submit_qualifications\qualification_requests.html:7
 msgid "Here you can manage all submitted qualificationsrequests."
 msgstr "Hier kannst du alle eingereichten Qualifikationsanfragen verwalten."
-
-#: .\templates\ephios_submit_qualifications\qualification_requests.html:13
-msgid "Action"
-msgstr "Aktion"
-
-#: .\templates\ephios_submit_qualifications\qualification_requests.html:22
-msgid "Check"
-msgstr "Überprüfen"
-
-#: .\templates\ephios_submit_qualifications\qualification_requests.html:27
-msgid "No qualificationsrequests found."
-msgstr "Keine Qualifikationsanfragen gefunden"
 
 #: .\templates\ephios_submit_qualifications\qualification_submit_form.html:6
 msgid "Submit Qualification"

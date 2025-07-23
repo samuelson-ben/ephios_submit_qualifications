@@ -82,9 +82,9 @@
   {% endif %}
 </form>
 
-<a
-  href="{% url 'ephios_submit_qualifications:qualification_requests' %}"
-  class="btn btn-secondary"
-  >{% trans "Back" %}</a
->
+{% if is_own_request %}
+  <a href="{% url 'ephios_submit_qualifications:own_qualification_requests' %}" class="btn btn-secondary">{% trans "Back" %}</a>
+{% else %}
+  <a href="{% url 'ephios_submit_qualifications:qualification_requests' %}" class="btn btn-secondary">{% trans "Back" %}</a>
+{% endif %}
 {% endblock %}

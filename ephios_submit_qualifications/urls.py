@@ -1,12 +1,23 @@
 from django.conf import settings
 from django.urls import path
-from .views import QualificationSubmitView, QualificationRequestsView, QualificationRequestDetailView, qualification_request_image
+from .views import (
+    OwnQualificationRequestView,
+    QualificationSubmitView,
+    QualificationRequestsView,
+    QualificationRequestDetailView,
+    qualification_request_image
+)
 
 app_name = "ephios_submit_qualifications"
 
 urlpatterns = [
     path(
-        "settings/qualifications/submit/",
+        "settings/qualifications/own/",
+        OwnQualificationRequestView.as_view(),
+        name="own_qualification_requests",
+    ),
+    path(
+        "settings/qualifications/own/submit/",
         QualificationSubmitView.as_view(),
         name="qualification_submit_form",
     ),

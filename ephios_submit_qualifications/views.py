@@ -16,10 +16,32 @@ from .notifications import (
     QualificationRequestRejectedNotification,
 )
 
+class OwnQualificationRequestView(LoginRequiredMixin, TemplateView):
+    template_name = "ephios_submit_qualifications/own_qualification_requests.html"
+
+    def dispatch(self, request, *args, **kwargs):
+        user = request.user
+
+        if not user.is_authenticated:
+            raise PermissionDenied("You do not have permission to view qualification requests.")
+        if not user.has_perm('ephios_submit_qualifications.view_own_qualification_requests'):
+            raise PermissionDenied("You do not have permission to view your own qualification requests.")
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_initial(self):
+        initial = super().get_initial()
+        return initial
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['qualification_requests'] = QualificationRequest.objects.filter(user=self.request.user)
+        context['can_submit'] = self.request.user.has_perm('ephios_submit_qualifications.add_qualification_request')
+        return context
+
 class QualificationSubmitView(LoginRequiredMixin, FormView):
     template_name = "ephios_submit_qualifications/qualification_submit_form.html"
     form_class = QualificationSubmitForm
-    success_url = reverse_lazy("core:settings_personal_data")
+    success_url = reverse_lazy("ephios_submit_qualifications:own_qualification_requests")
 
     def dispatch(self, request, *args, **kwargs):
         user = request.user
@@ -87,7 +109,7 @@ class QualificationRequestDetailView(LoginRequiredMixin, FormView):
             raise PermissionDenied("You do not have permission to view this request.")
         if user == self.qualification_request.user and not user.has_perm('ephios_submit_qualifications.view_own_qualification_requests'):
             raise PermissionDenied("You do not have permission to view your own request images.")
-        if not user.has_perm('ephios_submit_qualifications.view_qualification_request_details'):
+        if user != self.qualification_request.user and not user.has_perm('ephios_submit_qualifications.view_qualification_request_details'):
             raise PermissionDenied("You do not have permission to view this request.")
         return super().dispatch(request, *args, **kwargs)
     
@@ -148,7 +170,7 @@ def qualification_request_image(request, pk):
         raise PermissionDenied("You do not have permission to view this image.")
     if user == qr.user and not user.has_perm('ephios_submit_qualifications.view_own_qualification_requests'):
         raise PermissionDenied("You do not have permission to view your own request images.")
-    if not user.has_perm('ephios_submit_qualifications.view_qualification_request_details'):
+    if user != qr.user and not user.has_perm('ephios_submit_qualifications.view_qualification_request_details'):
         raise PermissionDenied("You do not have permission to view this request image.")
     
     return HttpResponse(

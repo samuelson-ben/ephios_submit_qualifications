@@ -10,14 +10,14 @@ def add_navigation_item(sender, request, **kwargs):
     user = request.user
 
     sections = []
-    
-    if user.is_authenticated and user.has_perm('ephios_submit_qualifications.add_qualification_request'):
+
+    if user.is_authenticated and user.has_perm('ephios_submit_qualifications.view_own_qualification_requests'):
         sections.append(
             {
-                "label": _("Submit Qualifications"),
-                "url": reverse("ephios_submit_qualifications:qualification_submit_form"),
+                "label": _("Own Qualification Requests"),
+                "url": reverse("ephios_submit_qualifications:own_qualification_requests"),
                 "group": SETTINGS_PERSONAL_SECTION_KEY,
-                "active": request.path.startswith(reverse("ephios_submit_qualifications:qualification_submit_form")),
+                "active": request.path.startswith(reverse("ephios_submit_qualifications:own_qualification_requests")),
             }
         )
     
@@ -69,4 +69,17 @@ def register_permission_fields(sender, **kwargs):
                 ],
             ),
         ),
+        (
+            "manage_qualification_default_expiration_times",
+            PermissionField(
+                label=_("Manage Qualification Default Expiration Times"),
+                help_text=_("Allows to manage default expiration times for qualifications."),
+                permissions=[
+                    "ephios_submit_qualifications.view_qualification_default_expiration_time",
+                    "ephios_submit_qualifications.add_qualification_default_expiration_time",
+                    "ephios_submit_qualifications.change_qualification_default_expiration_time",
+                    "ephios_submit_qualifications.delete_qualification_default_expiration_time",
+                ],
+            )
+        )
     ]
