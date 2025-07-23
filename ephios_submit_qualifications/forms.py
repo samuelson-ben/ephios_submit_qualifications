@@ -1,8 +1,20 @@
 from django.utils.translation import gettext_lazy as _
 from django import forms
+from ephios.core.models import Qualification
 from .models import QualificationRequest
 
 class QualificationSubmitForm(forms.ModelForm):
+    qualification = forms.ModelChoiceField(
+        queryset=Qualification.objects.all(),
+        required=True,
+        label=_("Qualification:"),
+        widget=forms.Select(attrs={"placeholder": _("Select Qualification")})
+    )
+    qualification_date = forms.DateField(
+        required=True,
+        label=_("Qualification Date:"),
+        widget=forms.DateInput(attrs={'type': 'date'})
+    )
     image = forms.ImageField(
         required=True,
         label=_("Upload Image"),
@@ -12,10 +24,6 @@ class QualificationSubmitForm(forms.ModelForm):
     class Meta:
         model = QualificationRequest
         fields = ['qualification', 'qualification_date']
-        widgets = {
-            'qualification': forms.Select(attrs={"placeholder": _("Select Qualification")}),
-            'qualification_date': forms.DateTimeInput(attrs={'type': 'date'}),
-        }
 
 class QualificationDetailForm(forms.Form):
     user = forms.CharField(

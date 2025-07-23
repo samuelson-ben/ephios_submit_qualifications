@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-22 21:19+0200\n"
+"POT-Creation-Date: 2025-07-23 10:11+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Ben Samuelson <ben.samuelson@fiteka.de>\n"
 "Language-Team: Ben Samuelson <ben.samuelson@fiteka.de>\n"
@@ -26,41 +26,49 @@ msgstr "Qualifikationen einreichen"
 msgid "Users can submit requests to gain qualifications."
 msgstr "Nutzer können Anfragen für Qualifikationen einreichen."
 
-#: .\forms.py:8
-msgid "Upload Image"
-msgstr "Bild hochladen"
+#: .\forms.py:10
+msgid "Qualification:"
+msgstr "Qualifikationen"
 
-#: .\forms.py:16
+#: .\forms.py:11
 msgid "Select Qualification"
 msgstr "Qualifikation auswählen"
 
-#: .\forms.py:22
+#: .\forms.py:15
+msgid "Qualification Date:"
+msgstr "Qualifikationsdatum:"
+
+#: .\forms.py:20
+msgid "Upload Image"
+msgstr "Bild hochladen"
+
+#: .\forms.py:30
 #: .\templates\ephios_submit_qualifications\qualification_requests.html:11
 msgid "User"
 msgstr "Nutzer"
 
-#: .\forms.py:27
+#: .\forms.py:35
 #: .\templates\ephios_submit_qualifications\qualification_requests.html:12
 msgid "Qualification"
 msgstr "Qualifikationen"
 
-#: .\forms.py:33
+#: .\forms.py:41
 msgid "Requested At"
 msgstr "Angefragt am"
 
-#: .\forms.py:38
+#: .\forms.py:46
 msgid "Qualification Date"
 msgstr "Qualifikationsdatum"
 
-#: .\forms.py:43
+#: .\forms.py:51
 msgid "Expires At"
 msgstr "Läuft ab am"
 
-#: .\forms.py:48
+#: .\forms.py:56
 msgid "Reason for Action"
 msgstr "Grund für Aktion"
 
-#: .\forms.py:49
+#: .\forms.py:57
 msgid "Optional reason for action"
 msgstr "Optionaler Grund für Aktion"
 
@@ -119,7 +127,9 @@ msgstr "Kein Bild hochgeladen."
 
 #: .\templates\ephios_submit_qualifications\qualification_request_detail.html:78
 msgid "You aren't allowed to manage your own qualification request."
-msgstr "Du hast nicht die nötige Berechtigung, deine eigene Qualifikationanfrage zu verwalten."
+msgstr ""
+"Du hast nicht die nötige Berechtigung, deine eigene Qualifikationanfrage zu "
+"verwalten."
 
 #: .\templates\ephios_submit_qualifications\qualification_request_detail.html:80
 msgid "Approve"
