@@ -31,6 +31,16 @@ def add_navigation_item(sender, request, **kwargs):
             }
         )
 
+    if user.is_authenticated and user.has_perm('ephios_submit_qualifications.view_qualification_default_expiration_time'):
+        sections.append(
+            {
+                "label": _("Qualification Default Expiration Times"),
+                "url": reverse("ephios_submit_qualifications:qualification_default_expiration_time_list"),
+                "group": SETTINGS_MANAGEMENT_SECTION_KEY,
+                "active": request.path.startswith(reverse("ephios_submit_qualifications:qualification_default_expiration_time_list")),
+            }
+        )
+
     return sections
 
 @receiver(register_group_permission_fields)
