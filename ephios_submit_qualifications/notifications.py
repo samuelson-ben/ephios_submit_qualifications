@@ -7,6 +7,7 @@ def register_notifications(sender, **kwargs):
     return [
         QualificationRequestAcceptedNotification,
         QualificationRequestRejectedNotification,
+        QualificationRequestCreateNotification,
     ]
 
 class QualificationRequestAcceptedNotification(AbstractNotificationHandler):
@@ -101,3 +102,44 @@ class QualificationRequestRejectedNotification(AbstractNotificationHandler):
     @classmethod
     def get_url(cls, notification):
         return reverse("core:settings_personal_data")
+
+class QualificationRequestCreateNotification(AbstractNotificationHandler):
+    slug = "qualification_request_created"
+    title = _("Qualification Request Created")
+
+    @classmethod
+    def send(cls, user, qualification_request):
+        Notification.objects.create(
+            slug=cls.slug,
+            user=user,
+            data={
+                "username": qualification_request.user.get_full_name() or _('Unknown Username'),
+            },
+        )
+
+    @classmethod
+    def get_subject(cls, notification):
+        return _("Qualification Request Created")
+    
+    @classmethod
+    def get_body(cls, notification):
+        base_text = _(
+            "{username} created a new qualification request."
+        ).format(
+            username=notification.data.get('username', _('Unknown Username')),
+        )
+        return base_text
+    
+    @classmethod
+    def as_html(cls, notification):
+        return """
+            <p><strong>{subject}</strong></p>
+            <p>{body}</p>
+        """.format(
+            subject=cls.get_subject(notification),
+            body=cls.get_body(notification),
+        )
+    
+    @classmethod
+    def get_url(cls, notification):
+        return reverse("ephios_submit_qualifications:qualification_requests")

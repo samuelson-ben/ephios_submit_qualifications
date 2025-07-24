@@ -1,7 +1,10 @@
 from django.utils.translation import gettext_lazy as _
 from django import forms
 from ephios.core.models import Qualification
-from .models import QualificationRequest, QualificationDefaultExpirationTime
+from .models import (
+    QualificationRequest,
+    QualificationDefaultExpirationTime,
+)
 
 class QualificationSubmitForm(forms.ModelForm):
     qualification = forms.ModelChoiceField(

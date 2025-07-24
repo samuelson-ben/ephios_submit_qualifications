@@ -2,7 +2,7 @@ from django.conf import settings
 from django.urls import path
 from .views import (
     OwnQualificationRequestView,
-    QualificationSubmitView,
+    QualificationRequestAddView,
     QualificationRequestsView,
     QualificationRequestDetailView,
     qualification_request_image,
@@ -21,7 +21,7 @@ urlpatterns = [
     ),
     path(
         "settings/qualifications/own/submit/",
-        QualificationSubmitView.as_view(),
+        QualificationRequestAddView.as_view(),
         name="qualification_submit_form",
     ),
     path(

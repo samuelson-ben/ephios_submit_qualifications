@@ -1,8 +1,6 @@
 from django.db import models
 from django.conf import settings
 from ephios.core.models import Qualification
-from logging import getLogger
-import os
 
 class QualificationRequest(models.Model):
     user = models.ForeignKey(
@@ -30,6 +28,7 @@ class QualificationRequest(models.Model):
             ("add_qualification_request", "Can add qualification requests"),
             ("manage_qualification_requests", "Can manage qualification requests"),
             ("manage_own_qualification_requests", "Can manage own qualification requests"),
+            ("get_notifications_for_new_qualification_requests", "Can get Notifications for new Qualification Request if Subscribed"),
         ]
 
     def __str__(self):

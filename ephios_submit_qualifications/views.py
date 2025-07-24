@@ -10,20 +10,21 @@ from django.utils.decorators import method_decorator
 from django.shortcuts import get_object_or_404
 from django.views.generic import FormView, TemplateView
 from django.urls import reverse_lazy
-from ephios.core.models import QualificationGrant
+from ephios.core.models import UserProfile, QualificationGrant
 from .forms import (
     QualificationSubmitForm,
     QualificationDetailForm,
     QualificationDefaultExpirationTimeAddForm,
-    QualificationDefaultExpirationTimeDetailForm
+    QualificationDefaultExpirationTimeDetailForm,
 )
 from .models import (
     QualificationRequest,
-    QualificationDefaultExpirationTime
+    QualificationDefaultExpirationTime,
 )
 from .notifications import (
     QualificationRequestAcceptedNotification,
     QualificationRequestRejectedNotification,
+    QualificationRequestCreateNotification,
 )
 
 class OwnQualificationRequestView(LoginRequiredMixin, TemplateView):
@@ -48,7 +49,7 @@ class OwnQualificationRequestView(LoginRequiredMixin, TemplateView):
         context['can_submit'] = self.request.user.has_perm('ephios_submit_qualifications.add_qualification_request')
         return context
 
-class QualificationSubmitView(LoginRequiredMixin, FormView):
+class QualificationRequestAddView(LoginRequiredMixin, FormView):
     template_name = "ephios_submit_qualifications/qualification_requests/add_form.html"
     form_class = QualificationSubmitForm
     success_url = reverse_lazy("ephios_submit_qualifications:own_qualification_requests")
@@ -75,13 +76,17 @@ class QualificationSubmitView(LoginRequiredMixin, FormView):
             image_data = None
             image_content_type = None
 
-        QualificationRequest.objects.create(
+        qualification_request = QualificationRequest.objects.create(
             user=self.request.user,
             qualification=form.cleaned_data['qualification'],
             qualification_date=form.cleaned_data['qualification_date'],
             image_data=image_data,
             image_content_type=image_content_type
         )
+
+        for user in UserProfile.objects.all():
+            if user.has_perm('ephios_submit_qualifications.get_notifications_for_new_qualification_requests'):
+                QualificationRequestCreateNotification.send(user, qualification_request)
 
         return super().form_valid(form)
 
@@ -104,6 +109,7 @@ class QualificationRequestsView(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['qualification_requests'] = QualificationRequest.objects.all()
+        context['can_subscribe'] = self.request.user.has_perm('ephios_submit_qualifications.get_notifications_for_new_qualification_requests')
         return context
 
 class QualificationRequestDetailView(LoginRequiredMixin, FormView):
@@ -198,6 +204,7 @@ def qualification_request_image(request, pk):
         qr.image_data,
         content_type=qr.image_content_type or 'application/octet-stream'
     )
+
 
 class QualificationDefaultExpirationTimeListView(LoginRequiredMixin, TemplateView):
     template_name = "ephios_submit_qualifications/qualification_default_expiration_time/list.html"
