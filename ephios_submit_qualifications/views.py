@@ -24,6 +24,7 @@ from .models import (
 from .notifications import (
     QualificationRequestAcceptedNotification,
     QualificationRequestRejectedNotification,
+    QualificationRequestCreateNotification,
 )
 
 class OwnQualificationRequestView(LoginRequiredMixin, TemplateView):
@@ -75,7 +76,7 @@ class QualificationRequestAddView(LoginRequiredMixin, FormView):
             image_data = None
             image_content_type = None
 
-        QualificationRequest.objects.create(
+        qualification_request = QualificationRequest.objects.create(
             user=self.request.user,
             qualification=form.cleaned_data['qualification'],
             qualification_date=form.cleaned_data['qualification_date'],
@@ -83,7 +84,7 @@ class QualificationRequestAddView(LoginRequiredMixin, FormView):
             image_content_type=image_content_type
         )
 
-
+        QualificationRequestCreateNotification.send(qualification_request)
 
         return super().form_valid(form)
 
