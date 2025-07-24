@@ -14,7 +14,6 @@ from ephios.core.models import QualificationGrant
 from .forms import (
     QualificationSubmitForm,
     QualificationDetailForm,
-    QualificationCreateSubscriptionForm,
     QualificationDefaultExpirationTimeAddForm,
     QualificationDefaultExpirationTimeDetailForm,
 )
@@ -105,6 +104,7 @@ class QualificationRequestsView(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['qualification_requests'] = QualificationRequest.objects.all()
+        context['can_subscribe'] = self.request.user.has_perm('ephios_submit_qualifications.get_notifications_for_new_qualification_requests')
         return context
 
 class QualificationRequestDetailView(LoginRequiredMixin, FormView):
@@ -199,6 +199,7 @@ def qualification_request_image(request, pk):
         qr.image_data,
         content_type=qr.image_content_type or 'application/octet-stream'
     )
+
 
 class QualificationDefaultExpirationTimeListView(LoginRequiredMixin, TemplateView):
     template_name = "ephios_submit_qualifications/qualification_default_expiration_time/list.html"
