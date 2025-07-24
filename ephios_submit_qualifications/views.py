@@ -1,4 +1,6 @@
+from django.utils.translation import gettext_lazy as _
 from datetime import datetime, time
+from dateutil.relativedelta import relativedelta
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
@@ -9,15 +11,23 @@ from django.shortcuts import get_object_or_404
 from django.views.generic import FormView, TemplateView
 from django.urls import reverse_lazy
 from ephios.core.models import QualificationGrant
-from .forms import QualificationSubmitForm, QualificationDetailForm
-from .models import QualificationRequest
+from .forms import (
+    QualificationSubmitForm,
+    QualificationDetailForm,
+    QualificationDefaultExpirationTimeAddForm,
+    QualificationDefaultExpirationTimeDetailForm
+)
+from .models import (
+    QualificationRequest,
+    QualificationDefaultExpirationTime
+)
 from .notifications import (
     QualificationRequestAcceptedNotification,
     QualificationRequestRejectedNotification,
 )
 
 class OwnQualificationRequestView(LoginRequiredMixin, TemplateView):
-    template_name = "ephios_submit_qualifications/own_qualification_requests.html"
+    template_name = "ephios_submit_qualifications/qualification_requests_own.html"
 
     def dispatch(self, request, *args, **kwargs):
         user = request.user
@@ -39,7 +49,7 @@ class OwnQualificationRequestView(LoginRequiredMixin, TemplateView):
         return context
 
 class QualificationSubmitView(LoginRequiredMixin, FormView):
-    template_name = "ephios_submit_qualifications/qualification_submit_form.html"
+    template_name = "ephios_submit_qualifications/qualification_request_submit_form.html"
     form_class = QualificationSubmitForm
     success_url = reverse_lazy("ephios_submit_qualifications:own_qualification_requests")
 
@@ -121,14 +131,25 @@ class QualificationRequestDetailView(LoginRequiredMixin, FormView):
         return context
 
     def get_initial(self):
-        qr = self.qualification_request
+        qualification_request = self.qualification_request
+        expiration_time = None
+        qualification_default_expiration_time = QualificationDefaultExpirationTime.objects.filter(
+            qualification=qualification_request.qualification
+        ).first()
+        if qualification_default_expiration_time:
+            expiration_time = qualification_request.qualification_date + relativedelta(
+                years=qualification_default_expiration_time.default_expiration_time_years,
+                days=qualification_default_expiration_time.default_expiration_time_days
+            )
         return {
-            'user': qr.user.get_full_name(),
-            'qualification': str(qr.qualification),
-            'qualification_date': qr.qualification_date.strftime('%Y-%m-%d'),
-            'requested_at': localtime(qr.requested_at).strftime('%Y-%m-%dT%H:%M'),
-            'expires_at': None,
-            'reason': ''
+            'user': qualification_request.user.get_full_name(),
+            'qualification': str(qualification_request.qualification),
+            'qualification_date': qualification_request.qualification_date.strftime('%Y-%m-%d'),
+            'requested_at': localtime(qualification_request.requested_at).strftime('%Y-%m-%dT%H:%M'),
+            'expires_at': expiration_time.strftime('%Y-%m-%d') if expiration_time else None,
+            'reason': '',
+            'qualification_default_expiration_time_days': qualification_default_expiration_time.default_expiration_time_days if qualification_default_expiration_time else None,
+            'qualification_default_expiration_time_years': qualification_default_expiration_time.default_expiration_time_years if qualification_default_expiration_time else None
         }
     
     def form_valid(self, form):
@@ -177,4 +198,92 @@ def qualification_request_image(request, pk):
         qr.image_data,
         content_type=qr.image_content_type or 'application/octet-stream'
     )
-    
+
+class QualificationDefaultExpirationTimeListView(LoginRequiredMixin, TemplateView):
+    template_name = "ephios_submit_qualifications/qualification_default_expiration_time_list.html"
+
+    def dispatch(self, request, *args, **kwargs):
+        user = request.user
+
+        if not user.is_authenticated:
+            raise PermissionDenied("You do not have permission to view default expiration times.")
+        if not user.has_perm('ephios_submit_qualifications.view_qualification_default_expiration_time'):
+            raise PermissionDenied("You do not have permission to view default expiration times.")
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['default_expiration_times'] = QualificationDefaultExpirationTime.objects.all()
+        context['can_add'] = self.request.user.has_perm('ephios_submit_qualifications.add_qualification_default_expiration_time')
+        return context
+
+class QualificationDefaultExpirationTimeAddView(LoginRequiredMixin, FormView):
+    template_name = "ephios_submit_qualifications/qualification_default_expiration_time_add_form.html"
+    form_class = QualificationDefaultExpirationTimeAddForm
+    success_url = reverse_lazy("ephios_submit_qualifications:qualification_default_expiration_time_list")
+
+    def dispatch(self, request, *args, **kwargs):
+        user = request.user
+
+        if not user.is_authenticated:
+            raise PermissionDenied("You do not have permission to add default expiration times.")
+        if not user.has_perm('ephios_submit_qualifications.add_qualification_default_expiration_time'):
+            raise PermissionDenied("You do not have permission to add default expiration times.")
+        return super().dispatch(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        if QualificationDefaultExpirationTime.objects.filter(
+            qualification=form.cleaned_data['qualification']
+        ).exists():
+            form.add_error('qualification', _("A default expiration time for this qualification already exists."))
+            return self.form_invalid(form)
+        form.save()
+        return super().form_valid(form)
+
+class QualificationDefaultExpirationTimeDetailView(LoginRequiredMixin, FormView):
+    template_name = "ephios_submit_qualifications/qualification_default_expiration_time_detail.html"
+    form_class = QualificationDefaultExpirationTimeDetailForm
+    success_url = reverse_lazy("ephios_submit_qualifications:qualification_default_expiration_time_list")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['qualification'] = self.default_expiration_time.qualification
+        context['can_change'] = self.request.user.has_perm('ephios_submit_qualifications.change_qualification_default_expiration_time')
+        context['can_delete'] = self.request.user.has_perm('ephios_submit_qualifications.delete_qualification_default_expiration_time')
+        return context
+
+    def dispatch(self, request, *args, **kwargs):
+        self.default_expiration_time = get_object_or_404(QualificationDefaultExpirationTime, pk=kwargs['pk'])
+        user = request.user
+
+        if not user.is_authenticated:
+            raise PermissionDenied("You do not have permission to view this default expiration time.")
+        if not user.has_perm('ephios_submit_qualifications.view_qualification_default_expiration_time'):
+            raise PermissionDenied("You do not have permission to change default expiration times.")
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_initial(self):
+        return {
+            'qualification': self.default_expiration_time.qualification,
+            'default_expiration_time_years': self.default_expiration_time.default_expiration_time_years,
+            'default_expiration_time_days': self.default_expiration_time.default_expiration_time_days
+        }
+
+    def form_valid(self, form):
+        user = self.request.user
+
+        if not user.is_authenticated:
+            raise PermissionDenied("You do not have permission to manage default expiration times.")
+        if not user.has_perm('ephios_submit_qualifications.change_qualification_default_expiration_time') or not user.has_perm('ephios_submit_qualifications.delete_qualification_default_expiration_time'):
+            raise PermissionDenied("You do not have permission to manage default expiration times.")
+        
+        if "save" in self.request.POST:
+            if not user.has_perm('ephios_submit_qualifications.change_qualification_default_expiration_time'):
+                raise PermissionDenied("You do not have permission to change default expiration times.")
+            form.instance.pk = self.default_expiration_time.pk
+            form.save()
+        elif "delete" in self.request.POST:
+            if not user.has_perm('ephios_submit_qualifications.delete_qualification_default_expiration_time'):
+                raise PermissionDenied("You do not have permission to delete default expiration times.")
+            self.default_expiration_time.delete()
+        return super().form_valid(form)
