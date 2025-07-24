@@ -1,7 +1,10 @@
 from django.utils.translation import gettext_lazy as _
 from django.urls import reverse
 from django.dispatch import receiver
-from ephios.core.signals import settings_sections, register_group_permission_fields
+from ephios.core.signals import (
+    settings_sections,
+    register_group_permission_fields,
+)
 from ephios.core.views.settings import SETTINGS_MANAGEMENT_SECTION_KEY, SETTINGS_PERSONAL_SECTION_KEY
 from ephios.extra.permissions import PermissionField
 

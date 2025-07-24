@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-24 13:48+0200\n"
+"POT-Creation-Date: 2025-07-24 14:32+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Ben Samuelson <ben.samuelson@fiteka.de>\n"
 "Language-Team: Ben Samuelson <ben.samuelson@fiteka.de>\n"
@@ -97,43 +97,43 @@ msgstr "Qualifikationsanfrage Abgelehnt"
 msgid "Your qualification request for {qualification} has been rejected."
 msgstr "Deine Qualifikationsanfrage für {qualification} wurde abgelehnt."
 
-#: .\signals.py:17
+#: .\signals.py:23
 msgid "Own Qualification Requests"
 msgstr "Eigene Qualifikationsanfragen"
 
-#: .\signals.py:27 .\signals.py:63
+#: .\signals.py:33 .\signals.py:69
 msgid "Manage Qualification Requests"
 msgstr "Qualifikationsanfragen verwalten"
 
-#: .\signals.py:37
+#: .\signals.py:43
 msgid "Qualification Default Expiration Times"
 msgstr "Standard Ablaufzeiten für Qualifikationen"
 
-#: .\signals.py:52
+#: .\signals.py:58
 msgid "Submit Qualification Requests"
 msgstr "Qualifikationsanfragen einreichen"
 
-#: .\signals.py:53
+#: .\signals.py:59
 msgid "Allows to submit qualification requests."
 msgstr "Erlaubt es Qualifikationsanfragen einzureichen."
 
-#: .\signals.py:64
+#: .\signals.py:70
 msgid "Allows to manage qualification requests."
 msgstr "Erlaubt es Qualifikationsanfragen zu verwalten."
 
-#: .\signals.py:75
+#: .\signals.py:81
 msgid "Manage Own Qualification Requests"
 msgstr "Eigene Qualifikationsanfragen verwalten."
 
-#: .\signals.py:76
+#: .\signals.py:82
 msgid "Allows to manage own qualification requests to."
 msgstr "Erlaubt es auch eingene Qualifikationsanfragen zu verwalten."
 
-#: .\signals.py:85
+#: .\signals.py:91
 msgid "Manage Qualification Default Expiration Times"
 msgstr "Standard Ablaufzeiten für Qualifikationen verwalten"
 
-#: .\signals.py:86
+#: .\signals.py:92
 msgid "Allows to manage default expiration times for qualifications."
 msgstr "Erlaubt es standard Ablaufzeiten für Qualifikationen zu verwalten."
 
@@ -143,7 +143,8 @@ msgstr "Standartablaufzeit für Qualifikation hinzufügen"
 
 #: .\templates\ephios_submit_qualifications\qualification_default_expiration_time_add_form.html:7
 msgid "Here you can add a default qualification expiration time."
-msgstr "Hier kannst du die standard Ablaufzeit für eine Qualifikation hinzufügen."
+msgstr ""
+"Hier kannst du die standard Ablaufzeit für eine Qualifikation hinzufügen."
 
 #: .\templates\ephios_submit_qualifications\qualification_default_expiration_time_add_form.html:12
 #: .\templates\ephios_submit_qualifications\qualification_default_expiration_time_detail.html:15
@@ -165,7 +166,9 @@ msgstr "Löschen"
 
 #: .\templates\ephios_submit_qualifications\qualification_default_expiration_time_detail.html:22
 msgid "You aren't allowed to manage default qualification expiration time."
-msgstr "Du hast nicht die nötige Berechtigung, die Standartablaufzeit für Qualifikationen zu verwalten."
+msgstr ""
+"Du hast nicht die nötige Berechtigung, die Standartablaufzeit für "
+"Qualifikationen zu verwalten."
 
 #: .\templates\ephios_submit_qualifications\qualification_default_expiration_time_detail.html:27
 #: .\templates\ephios_submit_qualifications\qualification_request_detail.html:82
@@ -178,8 +181,12 @@ msgid "Default Expiration Times for Qualifications"
 msgstr "Standartablaufzeiten für Qualifikationen"
 
 #: .\templates\ephios_submit_qualifications\qualification_default_expiration_time_list.html:7
-msgid "Here you can manage all default expiration times for the given Qualifications."
-msgstr "Hier können Sie alle Standardablaufzeiten für die angegebenen Qualifikationen verwalten."
+msgid ""
+"Here you can manage all default expiration times for the given "
+"Qualifications."
+msgstr ""
+"Hier können Sie alle Standardablaufzeiten für die angegebenen "
+"Qualifikationen verwalten."
 
 #: .\templates\ephios_submit_qualifications\qualification_default_expiration_time_list.html:9
 #: .\templates\ephios_submit_qualifications\qualification_requests_own.html:9
