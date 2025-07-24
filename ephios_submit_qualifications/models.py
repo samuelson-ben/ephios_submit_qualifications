@@ -34,3 +34,30 @@ class QualificationRequest(models.Model):
 
     def __str__(self):
         return f"{self.user} requested {self.qualification} on {self.requested_at}"
+
+class QualificationDefaultExpirationTime(models.Model):
+    qualification = models.ForeignKey(
+        Qualification,
+        on_delete=models.CASCADE,
+        related_name='default_expiration_times',
+    )
+    default_expiration_time_years = models.IntegerField(
+        default=0,
+    )
+    default_expiration_time_days = models.IntegerField(
+        default=0,
+    )
+
+    class Meta:
+        verbose_name = "Qualification Default Expiration Time"
+        verbose_name_plural = "Qualification Default Expiration Times"
+        ordering = ['qualification']
+        permissions = [
+            ("view_qualification_default_expiration_time", "Can view qualification default expiration times"),
+            ("add_qualification_default_expiration_time", "Can add qualification default expiration times"),
+            ("change_qualification_default_expiration_time", "Can change qualification default expiration times"),
+            ("delete_qualification_default_expiration_time", "Can delete qualification default expiration times"),
+        ]
+
+    def __str__(self):
+        return f"{self.qualification} - {self.default_expiration_time_years} years, {self.default_expiration_time_days} days"
