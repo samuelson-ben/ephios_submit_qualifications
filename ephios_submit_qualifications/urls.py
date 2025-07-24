@@ -5,7 +5,10 @@ from .views import (
     QualificationSubmitView,
     QualificationRequestsView,
     QualificationRequestDetailView,
-    qualification_request_image
+    qualification_request_image,
+    QualificationDefaultExpirationTimeListView,
+    QualificationDefaultExpirationTimeAddView,
+    QualificationDefaultExpirationTimeDetailView,
 )
 
 app_name = "ephios_submit_qualifications"
@@ -35,5 +38,20 @@ urlpatterns = [
         "settings/qualifications/requests/<int:pk>/image/",
         qualification_request_image,
         name="qualification_request_image",
+    ),
+    path(
+        "settings/qualificationsdefaultexpirationtimes/",
+        QualificationDefaultExpirationTimeListView.as_view(),
+        name="qualification_default_expiration_time_list",
+    ),
+    path(
+        "settings/qualificationsdefaultexpirationtimes/add/",
+        QualificationDefaultExpirationTimeAddView.as_view(),
+        name="qualification_default_expiration_time_add",
+    ),
+    path(
+        "settings/qualificationsdefaultexpirationtimes/<int:pk>/",
+        QualificationDefaultExpirationTimeDetailView.as_view(),
+        name="qualification_default_expiration_time_detail",
     ),
 ]
