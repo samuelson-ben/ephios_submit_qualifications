@@ -30,11 +30,31 @@ class QualificationRequest(models.Model):
             ("add_qualification_request", "Can add qualification requests"),
             ("manage_qualification_requests", "Can manage qualification requests"),
             ("manage_own_qualification_requests", "Can manage own qualification requests"),
-            ("ephios_submit_qualifications.get_notifications_for_new_qualification_requests", "Can get Notifications for new Qualification Request if Subscribed"),
         ]
 
     def __str__(self):
         return f"{self.user} requested {self.qualification} on {self.requested_at}"
+
+class QualificationCreateSubscription(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name='qualification_create_subscription',
+    )
+    subscriped = models.BooleanField(
+        default=False,
+    )
+
+    class Meta:
+        verbose_name = "Qualification Create Subscription"
+        verbose_name_plural = "Qualification Create Subscriptions"
+        ordering = ['user']
+        permissions = [
+            ("ephios_submit_qualifications.get_notifications_for_new_qualification_requests", "Can get Notifications for new Qualification Request if Subscribed"),
+        ]
+    
+    def __str__(self):
+        return f"{self.user} subscribed: {self.subscriped}"
 
 class QualificationDefaultExpirationTime(models.Model):
     qualification = models.ForeignKey(
