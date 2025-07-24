@@ -14,12 +14,13 @@ from ephios.core.models import QualificationGrant
 from .forms import (
     QualificationSubmitForm,
     QualificationDetailForm,
+    QualificationCreateSubscriptionForm,
     QualificationDefaultExpirationTimeAddForm,
-    QualificationDefaultExpirationTimeDetailForm
+    QualificationDefaultExpirationTimeDetailForm,
 )
 from .models import (
     QualificationRequest,
-    QualificationDefaultExpirationTime
+    QualificationDefaultExpirationTime,
 )
 from .notifications import (
     QualificationRequestAcceptedNotification,
