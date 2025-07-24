@@ -108,13 +108,12 @@ class QualificationRequestCreateNotification(AbstractNotificationHandler):
     title = _("Qualification Request Created")
 
     @classmethod
-    def send(cls, consequence: Consequence, reason=None):
-        qualification_request = consequence.qualification_request
+    def send(cls, user, qualification_request):
         Notification.objects.create(
             slug=cls.slug,
-            user=qualification_request.user,
+            user=user,
             data={
-                "username": getattr(qualification_request, 'user', _('Unknown Username')),
+                "username": qualification_request.user.get_full_name() or _('Unknown Username'),
             },
         )
 
@@ -125,9 +124,9 @@ class QualificationRequestCreateNotification(AbstractNotificationHandler):
     @classmethod
     def get_body(cls, notification):
         base_text = _(
-            "{username} created a qualification request."
+            "{username} created a new qualification request."
         ).format(
-            qualification=notification.data.get('username', _('Unknown Username')),
+            username=notification.data.get('username', _('Unknown Username')),
         )
         return base_text
     
