@@ -3,7 +3,6 @@ from django import forms
 from ephios.core.models import Qualification
 from .models import (
     QualificationRequest,
-    QualificationCreateSubscription,
     QualificationDefaultExpirationTime,
 )
 
@@ -65,20 +64,6 @@ class QualificationDetailForm(forms.Form):
         required=False,
         widget=forms.HiddenInput(),
     )
-
-class QualificationCreateSubscriptionForm(forms.ModelForm):
-    user = forms.CharField(
-        required=True,
-        widget=forms.HiddenInput()
-    )
-    subscriped = forms.BooleanField(
-        required=True,
-        widget=forms.HiddenInput()
-    )
-
-    class Meta:
-        model = QualificationCreateSubscription
-        fields = ['user', 'subscriped']
 
 class QualificationDefaultExpirationTimeAddForm(forms.ModelForm):
     qualification = forms.ModelChoiceField(
