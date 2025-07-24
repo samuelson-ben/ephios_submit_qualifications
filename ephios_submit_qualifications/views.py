@@ -48,7 +48,7 @@ class OwnQualificationRequestView(LoginRequiredMixin, TemplateView):
         context['can_submit'] = self.request.user.has_perm('ephios_submit_qualifications.add_qualification_request')
         return context
 
-class QualificationSubmitView(LoginRequiredMixin, FormView):
+class QualificationRequestAddView(LoginRequiredMixin, FormView):
     template_name = "ephios_submit_qualifications/qualification_requests/add_form.html"
     form_class = QualificationSubmitForm
     success_url = reverse_lazy("ephios_submit_qualifications:own_qualification_requests")
@@ -82,6 +82,8 @@ class QualificationSubmitView(LoginRequiredMixin, FormView):
             image_data=image_data,
             image_content_type=image_content_type
         )
+
+
 
         return super().form_valid(form)
 
