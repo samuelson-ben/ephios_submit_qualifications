@@ -1,0 +1,35 @@
+{% extends "core/settings/settings_base.html" %}
+
+{% load i18n %}
+
+{% block settings_content %}
+    <h2>{% trans "Default Expiration Times for Qualifications" %}</h2>
+    <p>{% trans "Here you can manage all default expiration times for the given Qualifications." %}</p>
+    {% if can_add %}
+        <a href="{% url 'ephios_submit_qualifications:qualification_default_expiration_time_add' %}" class="btn btn-primary mb-3">{% trans "Submit Qualification Request" %}</a>
+    {% endif %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>{% trans "Qualification" %}</th>
+                <th>{% trans "Default Epiration Time" %}</th>
+                <th>{% trans "Action" %}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for default_expiration_time in default_expiration_times %}
+                <tr>
+                    <td>{{ default_expiration_time.qualification }}</td>
+                    <td>{{ default_expiration_time.default_expiration_time_years }} {% trans "Years" %}, {{ default_expiration_time.default_expiration_time_days }} {% trans "Days" %}</td>
+                    <td>
+                        <a href="{% url 'ephios_submit_qualifications:qualification_default_expiration_time_detail' default_expiration_time.id %}" class="btn btn-info">{% trans "Check" %}</a>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="3">{% trans "No default expiration times found." %}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

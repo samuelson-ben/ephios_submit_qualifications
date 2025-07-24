@@ -1,0 +1,15 @@
+{% extends "core/settings/settings_base.html" %}
+
+{% load i18n %}
+
+{% block settings_content %}
+  <h2>{% trans "Add default qualification expiration time" %}</h2>
+  <p>{% trans "Here you can add a default qualification expiration time." %}</p>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <p>
+      <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
+    </p>
+  </form>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "core/settings/settings_base.html" %}
+
+{% load i18n %}
+
+{% block settings_content %}
+  <h2>{% trans "Manage default qualification expiration time" %}</h2>
+  <p>{% trans "Here you can change a default qualification expiration time." %}</p>
+  <form method="post" enctype="multipart/form-data">
+    <p>{% trans "Qualification" %}: {{ qualification }}</p>
+    {% csrf_token %}
+    {{ form.as_p }}
+    {% if can_change and can_delete %}
+      <p>
+        {% if can_change %}
+          <button class="btn btn-success" name="save" value="1">{% trans "Save" %}</button>
+        {% endif %}
+        {% if can_delete %}
+          <button class="btn btn-danger" name="delete" value="1">{% trans "Delete" %}</button>
+        {% endif %}
+      </p>
+    {% else %}
+      <p class="alert alert-warning">{% trans "You aren't allowed to manage default qualification expiration time." %}</p>
+    {% endif %}
+  </form>
+  
+  <p>
+    <a href="{% url 'ephios_submit_qualifications:qualification_default_expiration_time_list' %}" class="btn btn-secondary">{% trans "Back" %}</a>
+  </p>
+{% endblock %}

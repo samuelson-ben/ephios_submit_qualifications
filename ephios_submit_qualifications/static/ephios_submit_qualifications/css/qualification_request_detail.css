@@ -1,0 +1,14 @@
+#qualificationImage {
+    max-width: 400px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.modal-body {
+    text-align: center;
+}
+
+.modal-body img {
+    max-width: 100%;
+    height: auto;
+}
