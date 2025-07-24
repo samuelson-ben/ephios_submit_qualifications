@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-23 15:13+0200\n"
+"POT-Creation-Date: 2025-07-24 13:48+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Ben Samuelson <ben.samuelson@fiteka.de>\n"
 "Language-Team: Ben Samuelson <ben.samuelson@fiteka.de>\n"
@@ -26,52 +26,48 @@ msgstr "Qualifikationen einreichen"
 msgid "Users can submit requests to gain qualifications."
 msgstr "Nutzer können Anfragen für Qualifikationen einreichen."
 
-#: .\forms.py:10
-msgid "Qualification:"
+#: .\forms.py:10 .\forms.py:69
+#: .\templates\ephios_submit_qualifications\qualification_default_expiration_time_detail.html:9
+#: .\templates\ephios_submit_qualifications\qualification_default_expiration_time_list.html:14
+#: .\templates\ephios_submit_qualifications\qualification_request_detail.html:67
+#: .\templates\ephios_submit_qualifications\qualification_requests.html:12
+#: .\templates\ephios_submit_qualifications\qualification_requests_own.html:14
+msgid "Qualification"
 msgstr "Qualifikationen"
 
-#: .\forms.py:11
+#: .\forms.py:11 .\forms.py:70
 msgid "Select Qualification"
 msgstr "Qualifikation auswählen"
 
-#: .\forms.py:15
-msgid "Qualification Date:"
-msgstr "Qualifikationsdatum:"
+#: .\forms.py:15 .\forms.py:43
+msgid "Qualification Date"
+msgstr "Qualifikationsdatum"
 
 #: .\forms.py:20
 msgid "Upload Image"
 msgstr "Bild hochladen"
 
-#: .\forms.py:30
-#: .\templates\ephios_submit_qualifications\qualification_requests.html:11
-msgid "User"
-msgstr "Nutzer"
-
-#: .\forms.py:35
-#: .\templates\ephios_submit_qualifications\own_qualification_requests.html:14
-#: .\templates\ephios_submit_qualifications\qualification_requests.html:12
-msgid "Qualification"
-msgstr "Qualifikationen"
-
-#: .\forms.py:41
-msgid "Requested At"
-msgstr "Angefragt am"
-
-#: .\forms.py:46
-msgid "Qualification Date"
-msgstr "Qualifikationsdatum"
-
-#: .\forms.py:51
+#: .\forms.py:48
 msgid "Expires At"
 msgstr "Läuft ab am"
 
-#: .\forms.py:56
-msgid "Reason for Action"
-msgstr "Grund für Aktion"
-
-#: .\forms.py:57
-msgid "Optional reason for action"
+#: .\forms.py:53
+msgid "Optional Reason for Action"
 msgstr "Optionaler Grund für Aktion"
+
+#: .\forms.py:54
+msgid "Reason"
+msgstr "Grund"
+
+#: .\forms.py:74 .\forms.py:75 .\forms.py:95 .\forms.py:96
+#: .\templates\ephios_submit_qualifications\qualification_default_expiration_time_list.html:23
+msgid "Years"
+msgstr "Jahre"
+
+#: .\forms.py:79 .\forms.py:80 .\forms.py:100 .\forms.py:101
+#: .\templates\ephios_submit_qualifications\qualification_default_expiration_time_list.html:23
+msgid "Days"
+msgstr "Tage"
 
 #: .\notifications.py:14 .\notifications.py:30
 msgid "Qualification Request Accepted"
@@ -89,12 +85,8 @@ msgstr "Deine Qualifikationsanfrage für {qualification} wurde akzeptiert."
 
 #: .\notifications.py:41 .\notifications.py:87
 #, python-brace-format
-msgid ""
-"\n"
-"Reason: {reason}"
-msgstr ""
-"\n"
-"Grund: {reason}"
+msgid "Reason: {reason}"
+msgstr "Grund: {reason}"
 
 #: .\notifications.py:60 .\notifications.py:76
 msgid "Qualification Request Rejected"
@@ -109,118 +101,186 @@ msgstr "Deine Qualifikationsanfrage für {qualification} wurde abgelehnt."
 msgid "Own Qualification Requests"
 msgstr "Eigene Qualifikationsanfragen"
 
-#: .\signals.py:27 .\signals.py:53
+#: .\signals.py:27 .\signals.py:63
 msgid "Manage Qualification Requests"
 msgstr "Qualifikationsanfragen verwalten"
 
-#: .\signals.py:42
+#: .\signals.py:37
+msgid "Qualification Default Expiration Times"
+msgstr "Standard Ablaufzeiten für Qualifikationen"
+
+#: .\signals.py:52
 msgid "Submit Qualification Requests"
 msgstr "Qualifikationsanfragen einreichen"
 
-#: .\signals.py:43
+#: .\signals.py:53
 msgid "Allows to submit qualification requests."
 msgstr "Erlaubt es Qualifikationsanfragen einzureichen."
 
-#: .\signals.py:54
+#: .\signals.py:64
 msgid "Allows to manage qualification requests."
 msgstr "Erlaubt es Qualifikationsanfragen zu verwalten."
 
-#: .\signals.py:65
+#: .\signals.py:75
 msgid "Manage Own Qualification Requests"
 msgstr "Eigene Qualifikationsanfragen verwalten."
 
-#: .\signals.py:66
+#: .\signals.py:76
 msgid "Allows to manage own qualification requests to."
 msgstr "Erlaubt es auch eingene Qualifikationsanfragen zu verwalten."
 
-#: .\templates\ephios_submit_qualifications\own_qualification_requests.html:6
-#: .\templates\ephios_submit_qualifications\qualification_requests.html:6
-msgid "Submitted Qualificationsrequests"
-msgstr "Eingereichte Qualifikationsanfragen"
+#: .\signals.py:85
+msgid "Manage Qualification Default Expiration Times"
+msgstr "Standard Ablaufzeiten für Qualifikationen verwalten"
 
-#: .\templates\ephios_submit_qualifications\own_qualification_requests.html:7
-msgid "Here you can manage your submitted qualificationsrequests."
-msgstr "Hier kannst du alle eingereichten Qualifikationsanfragen verwalten."
+#: .\signals.py:86
+msgid "Allows to manage default expiration times for qualifications."
+msgstr "Erlaubt es standard Ablaufzeiten für Qualifikationen zu verwalten."
 
-#: .\templates\ephios_submit_qualifications\own_qualification_requests.html:9
+#: .\templates\ephios_submit_qualifications\qualification_default_expiration_time_add_form.html:6
+msgid "Add default qualification expiration time"
+msgstr "Standartablaufzeit für Qualifikation hinzufügen"
+
+#: .\templates\ephios_submit_qualifications\qualification_default_expiration_time_add_form.html:7
+msgid "Here you can add a default qualification expiration time."
+msgstr "Hier kannst du die standard Ablaufzeit für eine Qualifikation hinzufügen."
+
+#: .\templates\ephios_submit_qualifications\qualification_default_expiration_time_add_form.html:12
+#: .\templates\ephios_submit_qualifications\qualification_default_expiration_time_detail.html:15
+#: .\templates\ephios_submit_qualifications\qualification_request_submit_form.html:12
+msgid "Save"
+msgstr "Speichern"
+
+#: .\templates\ephios_submit_qualifications\qualification_default_expiration_time_detail.html:6
+msgid "Manage default qualification expiration time"
+msgstr "Standartablaufzeiten für Qualifikationen verwalten"
+
+#: .\templates\ephios_submit_qualifications\qualification_default_expiration_time_detail.html:7
+msgid "Here you can change a default qualification expiration time."
+msgstr "Hier kannst du die Standartablaufzeit der Qualifikation ändern."
+
+#: .\templates\ephios_submit_qualifications\qualification_default_expiration_time_detail.html:18
+msgid "Delete"
+msgstr "Löschen"
+
+#: .\templates\ephios_submit_qualifications\qualification_default_expiration_time_detail.html:22
+msgid "You aren't allowed to manage default qualification expiration time."
+msgstr "Du hast nicht die nötige Berechtigung, die Standartablaufzeit für Qualifikationen zu verwalten."
+
+#: .\templates\ephios_submit_qualifications\qualification_default_expiration_time_detail.html:27
+#: .\templates\ephios_submit_qualifications\qualification_request_detail.html:82
+#: .\templates\ephios_submit_qualifications\qualification_request_detail.html:84
+msgid "Back"
+msgstr "Zurück"
+
+#: .\templates\ephios_submit_qualifications\qualification_default_expiration_time_list.html:6
+msgid "Default Expiration Times for Qualifications"
+msgstr "Standartablaufzeiten für Qualifikationen"
+
+#: .\templates\ephios_submit_qualifications\qualification_default_expiration_time_list.html:7
+msgid "Here you can manage all default expiration times for the given Qualifications."
+msgstr "Hier können Sie alle Standardablaufzeiten für die angegebenen Qualifikationen verwalten."
+
+#: .\templates\ephios_submit_qualifications\qualification_default_expiration_time_list.html:9
+#: .\templates\ephios_submit_qualifications\qualification_requests_own.html:9
 msgid "Submit Qualification Request"
 msgstr "Qualifikationsanfragen einreichen"
 
-#: .\templates\ephios_submit_qualifications\own_qualification_requests.html:15
-msgid "Requested at"
-msgstr "Angefragt am"
+#: .\templates\ephios_submit_qualifications\qualification_default_expiration_time_list.html:15
+msgid "Default Epiration Time"
+msgstr "Standardablaufzeit"
 
-#: .\templates\ephios_submit_qualifications\own_qualification_requests.html:16
+#: .\templates\ephios_submit_qualifications\qualification_default_expiration_time_list.html:16
 #: .\templates\ephios_submit_qualifications\qualification_requests.html:13
+#: .\templates\ephios_submit_qualifications\qualification_requests_own.html:16
 msgid "Action"
 msgstr "Aktion"
 
-#: .\templates\ephios_submit_qualifications\own_qualification_requests.html:25
+#: .\templates\ephios_submit_qualifications\qualification_default_expiration_time_list.html:25
 #: .\templates\ephios_submit_qualifications\qualification_requests.html:22
+#: .\templates\ephios_submit_qualifications\qualification_requests_own.html:25
 msgid "Check"
 msgstr "Überprüfen"
 
-#: .\templates\ephios_submit_qualifications\own_qualification_requests.html:30
-#: .\templates\ephios_submit_qualifications\qualification_requests.html:27
-msgid "No qualificationsrequests found."
-msgstr "Keine Qualifikationsanfragen gefunden"
+#: .\templates\ephios_submit_qualifications\qualification_default_expiration_time_list.html:30
+msgid "No default expiration times found."
+msgstr "Keine Standardablaufzeiten gefunden."
 
-#: .\templates\ephios_submit_qualifications\qualification_request_detail.html:25
+#: .\templates\ephios_submit_qualifications\qualification_request_detail.html:15
 msgid "Details for the Qualificationrequest"
 msgstr "Details der Qualifikationsanfrage"
 
-#: .\templates\ephios_submit_qualifications\qualification_request_detail.html:27
-#: .\templates\ephios_submit_qualifications\qualification_request_detail.html:32
+#: .\templates\ephios_submit_qualifications\qualification_request_detail.html:17
+#: .\templates\ephios_submit_qualifications\qualification_request_detail.html:22
 msgid "Uploaded Image"
 msgstr "Hochgeladenes Bild"
 
-#: .\templates\ephios_submit_qualifications\qualification_request_detail.html:44
+#: .\templates\ephios_submit_qualifications\qualification_request_detail.html:34
 msgid "Download Image"
 msgstr "Bild herunterladen"
 
-#: .\templates\ephios_submit_qualifications\qualification_request_detail.html:60
+#: .\templates\ephios_submit_qualifications\qualification_request_detail.html:50
 msgid "Qualification Image"
 msgstr "Qualifikationsbild"
 
-#: .\templates\ephios_submit_qualifications\qualification_request_detail.html:65
+#: .\templates\ephios_submit_qualifications\qualification_request_detail.html:55
 msgid "Close"
 msgstr "Schließen"
 
-#: .\templates\ephios_submit_qualifications\qualification_request_detail.html:72
+#: .\templates\ephios_submit_qualifications\qualification_request_detail.html:62
 msgid "No image uploaded."
 msgstr "Kein Bild hochgeladen."
 
-#: .\templates\ephios_submit_qualifications\qualification_request_detail.html:78
+#: .\templates\ephios_submit_qualifications\qualification_request_detail.html:66
+#: .\templates\ephios_submit_qualifications\qualification_requests.html:11
+msgid "User"
+msgstr "Nutzer"
+
+#: .\templates\ephios_submit_qualifications\qualification_request_detail.html:68
+#: .\templates\ephios_submit_qualifications\qualification_requests_own.html:15
+msgid "Requested at"
+msgstr "Angefragt am"
+
+#: .\templates\ephios_submit_qualifications\qualification_request_detail.html:71
 msgid "You aren't allowed to manage your own qualification request."
 msgstr ""
 "Du hast nicht die nötige Berechtigung, deine eigene Qualifikationanfrage zu "
 "verwalten."
 
-#: .\templates\ephios_submit_qualifications\qualification_request_detail.html:80
+#: .\templates\ephios_submit_qualifications\qualification_request_detail.html:74
 msgid "Approve"
 msgstr "Bestätigen"
 
-#: .\templates\ephios_submit_qualifications\qualification_request_detail.html:81
+#: .\templates\ephios_submit_qualifications\qualification_request_detail.html:75
 msgid "Deny"
 msgstr "Ablehnen"
 
-#: .\templates\ephios_submit_qualifications\qualification_request_detail.html:86
-#: .\templates\ephios_submit_qualifications\qualification_request_detail.html:88
-msgid "Back"
-msgstr "Zurück"
+#: .\templates\ephios_submit_qualifications\qualification_request_submit_form.html:6
+msgid "Submit Qualification"
+msgstr "Qualifikationen einreichen"
+
+#: .\templates\ephios_submit_qualifications\qualification_request_submit_form.html:7
+msgid "Here you can submit your qualifications."
+msgstr "Hier kannst du deine Qualifikationen einreichen."
+
+#: .\templates\ephios_submit_qualifications\qualification_requests.html:6
+#: .\templates\ephios_submit_qualifications\qualification_requests_own.html:6
+msgid "Submitted Qualificationsrequests"
+msgstr "Eingereichte Qualifikationsanfragen"
 
 #: .\templates\ephios_submit_qualifications\qualification_requests.html:7
 msgid "Here you can manage all submitted qualificationsrequests."
 msgstr "Hier kannst du alle eingereichten Qualifikationsanfragen verwalten."
 
-#: .\templates\ephios_submit_qualifications\qualification_submit_form.html:6
-msgid "Submit Qualification"
-msgstr "Qualifikationen einreichen"
+#: .\templates\ephios_submit_qualifications\qualification_requests.html:27
+#: .\templates\ephios_submit_qualifications\qualification_requests_own.html:30
+msgid "No qualificationsrequests found."
+msgstr "Keine Qualifikationsanfragen gefunden"
 
-#: .\templates\ephios_submit_qualifications\qualification_submit_form.html:7
-msgid "Here you can submit your qualifications."
-msgstr "Hier kannst du deine Qualifikationen einreichen."
+#: .\templates\ephios_submit_qualifications\qualification_requests_own.html:7
+msgid "Here you can manage your submitted qualificationsrequests."
+msgstr "Hier kannst du deine eingereichten Qualifikationsanfragen verwalten."
 
-#: .\templates\ephios_submit_qualifications\qualification_submit_form.html:11
-msgid "Save"
-msgstr "Speichern"
+#: .\views.py:238
+msgid "A default expiration time for this qualification already exists."
+msgstr "Für diese Qualifikation ist bereits eine Standardablaufzeit vorhanden."
