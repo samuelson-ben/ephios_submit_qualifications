@@ -38,7 +38,7 @@ class QualificationRequestAcceptedNotification(AbstractNotificationHandler):
         )
         reason = notification.data.get('reason', None)
         if reason:
-            base_text += _("\nReason: {reason}").format(reason=reason)
+            base_text += "\n" + _("Reason: {reason}").format(reason=reason)
         return base_text
     
     @classmethod
@@ -84,7 +84,7 @@ class QualificationRequestRejectedNotification(AbstractNotificationHandler):
         )
         reason = notification.data.get('reason', None)
         if reason:
-            base_text += _("\nReason: {reason}").format(reason=reason)
+            base_text += "\n" + _("Reason: {reason}").format(reason=reason)
         return base_text
         
     
@@ -95,8 +95,8 @@ class QualificationRequestRejectedNotification(AbstractNotificationHandler):
             <p>{body}</p>
         """.format(
             subject=cls.get_subject(notification),
-            body=cls.get_body(notification),
-        ).replace("\n", "<br>")
+            body=cls.get_body(notification).replace("\n", "<br>"),
+        )
     
     @classmethod
     def get_url(cls, notification):
