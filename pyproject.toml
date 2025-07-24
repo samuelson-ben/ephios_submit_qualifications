@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ephios-submit-qualifications"
-version = "0.1.0"
+version = "1.0.0"
 description = "Users can submit requests to gain qualifications"
 authors = ["Ben Samuelson <ben.samuelson@fiteka.de>"]
 license = "GPL-3.0-or-later"

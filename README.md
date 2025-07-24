@@ -1,5 +1,7 @@
 # ephios_submit_qualifications
 
+Version: 1.0.0
+
 A plugin for [ephios](https://ephios.de/) that allows users to submit and manage their qualifications.
 
 ## Features
