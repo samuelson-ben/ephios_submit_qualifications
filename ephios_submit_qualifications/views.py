@@ -10,7 +10,7 @@ from django.utils.decorators import method_decorator
 from django.shortcuts import get_object_or_404
 from django.views.generic import FormView, TemplateView
 from django.urls import reverse_lazy
-from ephios.core.models import QualificationGrant
+from ephios.core.models import UserProfile, QualificationGrant
 from .forms import (
     QualificationSubmitForm,
     QualificationDetailForm,
@@ -84,7 +84,9 @@ class QualificationRequestAddView(LoginRequiredMixin, FormView):
             image_content_type=image_content_type
         )
 
-        QualificationRequestCreateNotification.send(qualification_request)
+        for user in UserProfile.objects.all():
+            if user.has_perm('ephios_submit_qualifications.get_notifications_for_new_qualification_requests'):
+                QualificationRequestCreateNotification.send(user, qualification_request)
 
         return super().form_valid(form)
 
