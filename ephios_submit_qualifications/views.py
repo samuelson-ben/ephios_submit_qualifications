@@ -27,7 +27,7 @@ from .notifications import (
 )
 
 class OwnQualificationRequestView(LoginRequiredMixin, TemplateView):
-    template_name = "ephios_submit_qualifications/qualification_requests_own.html"
+    template_name = "ephios_submit_qualifications/qualification_requests/own_list.html"
 
     def dispatch(self, request, *args, **kwargs):
         user = request.user
@@ -49,7 +49,7 @@ class OwnQualificationRequestView(LoginRequiredMixin, TemplateView):
         return context
 
 class QualificationSubmitView(LoginRequiredMixin, FormView):
-    template_name = "ephios_submit_qualifications/qualification_request_submit_form.html"
+    template_name = "ephios_submit_qualifications/qualification_requests/add_form.html"
     form_class = QualificationSubmitForm
     success_url = reverse_lazy("ephios_submit_qualifications:own_qualification_requests")
 
@@ -86,7 +86,7 @@ class QualificationSubmitView(LoginRequiredMixin, FormView):
         return super().form_valid(form)
 
 class QualificationRequestsView(LoginRequiredMixin, TemplateView):
-    template_name = "ephios_submit_qualifications/qualification_requests.html"
+    template_name = "ephios_submit_qualifications/qualification_requests/list.html"
 
     def dispatch(self, request, *args, **kwargs):
         user = request.user
@@ -107,7 +107,7 @@ class QualificationRequestsView(LoginRequiredMixin, TemplateView):
         return context
 
 class QualificationRequestDetailView(LoginRequiredMixin, FormView):
-    template_name = "ephios_submit_qualifications/qualification_request_detail.html"
+    template_name = "ephios_submit_qualifications/qualification_requests/details_form.html"
     form_class = QualificationDetailForm
     success_url = reverse_lazy("ephios_submit_qualifications:qualification_requests")
 
@@ -200,7 +200,7 @@ def qualification_request_image(request, pk):
     )
 
 class QualificationDefaultExpirationTimeListView(LoginRequiredMixin, TemplateView):
-    template_name = "ephios_submit_qualifications/qualification_default_expiration_time_list.html"
+    template_name = "ephios_submit_qualifications/qualification_default_expiration_time/list.html"
 
     def dispatch(self, request, *args, **kwargs):
         user = request.user
@@ -218,7 +218,7 @@ class QualificationDefaultExpirationTimeListView(LoginRequiredMixin, TemplateVie
         return context
 
 class QualificationDefaultExpirationTimeAddView(LoginRequiredMixin, FormView):
-    template_name = "ephios_submit_qualifications/qualification_default_expiration_time_add_form.html"
+    template_name = "ephios_submit_qualifications/qualification_default_expiration_time/add_form.html"
     form_class = QualificationDefaultExpirationTimeAddForm
     success_url = reverse_lazy("ephios_submit_qualifications:qualification_default_expiration_time_list")
 
@@ -241,7 +241,7 @@ class QualificationDefaultExpirationTimeAddView(LoginRequiredMixin, FormView):
         return super().form_valid(form)
 
 class QualificationDefaultExpirationTimeDetailView(LoginRequiredMixin, FormView):
-    template_name = "ephios_submit_qualifications/qualification_default_expiration_time_detail.html"
+    template_name = "ephios_submit_qualifications/qualification_default_expiration_time/details_form.html"
     form_class = QualificationDefaultExpirationTimeDetailForm
     success_url = reverse_lazy("ephios_submit_qualifications:qualification_default_expiration_time_list")
 
