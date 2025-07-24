@@ -50,7 +50,7 @@ def add_navigation_item(sender, request, **kwargs):
 def register_permission_fields(sender, **kwargs):
     return [
         (
-            "submit_qualification_requests",
+            "add_qualification_requests",
             PermissionField(
                 label=_("Submit Qualification Requests"),
                 help_text=_("Allows to submit qualification requests."),
@@ -69,6 +69,7 @@ def register_permission_fields(sender, **kwargs):
                     "ephios_submit_qualifications.view_qualification_requests",
                     "ephios_submit_qualifications.view_qualification_request_details",
                     "ephios_submit_qualifications.manage_qualification_requests",
+                    "ephios_submit_qualifications.get_notifications_for_new_qualification_requests",
                 ],
             ),
         ),

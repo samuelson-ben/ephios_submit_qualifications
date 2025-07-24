@@ -30,6 +30,7 @@ class QualificationRequest(models.Model):
             ("add_qualification_request", "Can add qualification requests"),
             ("manage_qualification_requests", "Can manage qualification requests"),
             ("manage_own_qualification_requests", "Can manage own qualification requests"),
+            ("ephios_submit_qualifications.get_notifications_for_new_qualification_requests", "Can get Notifications for new Qualification Request if Subscribed"),
         ]
 
     def __str__(self):
